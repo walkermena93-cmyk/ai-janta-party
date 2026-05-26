@@ -11,17 +11,17 @@
     body { background: var(--dark); color: white; font-family: 'Inter', sans-serif; line-height: 1.7; }
     header { background: linear-gradient(135deg, #00ff9f, #00b86e); color: black; text-align: center; padding: 60px 20px 40px; position: relative; }
     .logo { font-size: 3.8rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px; }
-    .join-btn, .members-btn { position: absolute; top: 20px; padding: 10px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; }
-    .join-btn { right: 20px; background: black; color: var(--primary); }
+    .btn-top { position: absolute; top: 20px; padding: 10px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; }
     .members-btn { left: 20px; background: #00ff9f; color: black; }
+    .join-btn { right: 20px; background: black; color: var(--primary); }
     .hero { padding: 60px 20px; text-align: center; background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://source.unsplash.com/random/1920x1080/?ai,future'); background-size: cover; }
     .section { padding: 60px 20px; background: var(--card); }
     .points { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; }
     .point { background: #1a1a24; padding: 20px; border-radius: 12px; border-left: 6px solid var(--primary); }
     .point-number { color: var(--primary); font-weight: bold; }
     .join-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; margin: 40px auto; }
-    .join-card { background: #1a1a24; padding: 25px; border-radius: 16px; text-align: center; border: 2px solid #333; }
-    .join-card:hover { border-color: var(--primary); }
+    .join-card { background: #1a1a24; padding: 25px; border-radius: 16px; text-align: center; border: 2px solid #333; transition: 0.3s; }
+    .join-card:hover { border-color: var(--primary); transform: translateY(-5px); }
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; }
     .modal-content { background: #12121a; padding: 30px; border-radius: 16px; width: 90%; max-width: 500px; }
     .form-group { margin-bottom: 15px; }
@@ -34,8 +34,8 @@
 
   <header>
     <div class="logo">AI JANTA PARTY</div>
-    <button class="members-btn" onclick="showMembers()">Joined Members</button>
-    <button class="join-btn" onclick="document.getElementById('join-section').scrollIntoView({behavior:'smooth'})">JOIN PARTY</button>
+    <button class="btn-top members-btn" onclick="showMembers()">Joined Members</button>
+    <button class="btn-top join-btn" onclick="document.getElementById('join-section').scrollIntoView({behavior:'smooth'})">JOIN PARTY</button>
   </header>
 
   <div class="hero">
@@ -43,7 +43,7 @@
     <p style="font-size:1.3rem;max-width:800px;margin:20px auto;">Corruption Khatam • Nyay Tez • Aam Aadmi ka Raj</p>
   </div>
 
-  <!-- Manifesto (All 23 Points) -->
+  <!-- Manifesto -->
   <div class="section">
     <h2 style="text-align:center; color:var(--primary); margin-bottom:40px;">हमारा संकल्प - Manifesto</h2>
     <div class="points">
@@ -73,33 +73,33 @@
     </div>
   </div>
 
-  <!-- Join Party -->
+  <!-- Join Options -->
   <div class="section" id="join-section">
-    <h2 style="text-align:center; color:var(--primary);">JOIN AI JANTA PARTY</h2>
+    <h2 style="text-align:center; color:var(--primary); margin-bottom:40px;">JOIN AI JANTA PARTY</h2>
     <div class="join-options">
-      <div class="join-card"><h3>1. Karyakarta</h3><button onclick="openJoinForm(1)">Join Now</button></div>
-      <div class="join-card"><h3>2. Leader</h3><button onclick="openJoinForm(2)">Join Now</button></div>
-      <div class="join-card"><h3>3. Party Promoter</h3><button onclick="openJoinForm(3)">Join Now</button></div>
-      <div class="join-card"><h3>4. Party Donator</h3><button onclick="openJoinForm(4)">Join Now</button></div>
-      <div class="join-card"><h3>5. Party Supporter</h3><button onclick="openJoinForm(5)">Join Now</button></div>
+      <div class="join-card"><h3>1. Karyakarta</h3><button onclick="openJoinForm(1)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
+      <div class="join-card"><h3>2. Leader</h3><button onclick="openJoinForm(2)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
+      <div class="join-card"><h3>3. Party Promoter</h3><button onclick="openJoinForm(3)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
+      <div class="join-card"><h3>4. Party Donator</h3><button onclick="openJoinForm(4)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
+      <div class="join-card"><h3>5. Party Supporter</h3><button onclick="openJoinForm(5)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
     </div>
   </div>
 
   <!-- Join Form Modal -->
   <div id="joinModal" class="modal">
     <div class="modal-content">
-      <h2 id="form-title" style="color:var(--primary);">Join as ...</h2>
-      <div class="form-group"><label>Name</label><input type="text" id="name"></div>
-      <div class="form-group"><label>Email</label><input type="email" id="email"></div>
-      <div class="form-group"><label>Mobile Number</label><input type="tel" id="mobile"></div>
-      <button onclick="submitJoin()" style="width:100%;padding:15px;background:var(--primary);color:black;border:none;border-radius:10px;font-weight:bold;">Submit & Join Party</button>
-      <button onclick="closeModal()" style="width:100%;margin-top:10px;padding:12px;background:#333;border:none;border-radius:10px;">Cancel</button>
+      <h2 id="form-title" style="color:var(--primary); margin-bottom:20px;">Join as Karyakarta</h2>
+      <div class="form-group"><label>Name *</label><input type="text" id="name" placeholder="Aapka Naam"></div>
+      <div class="form-group"><label>Mobile Number *</label><input type="tel" id="mobile" placeholder="98765 43210"></div>
+      <div class="form-group"><label>Email *</label><input type="email" id="email" placeholder="aapka@email.com"></div>
+      <button onclick="submitJoin()" style="width:100%; padding:15px; background:var(--primary); color:black; border:none; border-radius:10px; font-weight:bold; margin-top:10px;">Submit & Join Party</button>
+      <button onclick="closeModal()" style="width:100%; padding:12px; background:#333; border:none; border-radius:10px; margin-top:10px;">Cancel</button>
     </div>
   </div>
 
   <!-- Members List -->
   <div class="section" id="membersList" style="display:none;">
-    <h2 style="text-align:center;color:var(--primary);">Joined Members List</h2>
+    <h2 style="text-align:center;color:var(--primary);">Joined Members</h2>
     <div id="members-container"></div>
   </div>
 
@@ -107,7 +107,6 @@
     <p><strong>AI Janta Party © 2026</strong></p>
   </footer>
 
-  <!-- Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -131,3 +130,59 @@
     window.openJoinForm = function(role) {
       const roles = ["Karyakarta", "Leader", "Party Promoter", "Party Donator", "Party Supporter"];
       currentRole = roles[role-1];
+      document.getElementById('form-title').textContent = "Join as " + currentRole;
+      document.getElementById('joinModal').style.display = "flex";
+    };
+
+    window.closeModal = function() {
+      document.getElementById('joinModal').style.display = "none";
+    };
+
+    window.submitJoin = function() {
+      const name = document.getElementById('name').value.trim();
+      const mobile = document.getElementById('mobile').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      if (!name || !mobile || !email) {
+        alert("Name, Mobile aur Email sab bharein");
+        return;
+      }
+
+      push(membersRef, {
+        name: name,
+        mobile: mobile,
+        email: email,
+        role: currentRole,
+        timestamp: Date.now()
+      });
+
+      alert("🎉 Aap successfully join ho gaye!");
+      closeModal();
+      document.getElementById('name').value = '';
+      document.getElementById('mobile').value = '';
+      document.getElementById('email').value = '';
+    };
+
+    window.showMembers = function() {
+      document.getElementById('membersList').style.display = "block";
+      const container = document.getElementById('members-container');
+      container.innerHTML = "<p>Loading...</p>";
+
+      onValue(membersRef, (snapshot) => {
+        container.innerHTML = "";
+        const data = snapshot.val();
+        if (!data) {
+          container.innerHTML = "<p>Abhi koi member nahi hai.</p>";
+          return;
+        }
+        Object.values(data).reverse().forEach(m => {
+          const div = document.createElement('div');
+          div.className = 'member';
+          div.innerHTML = `<strong>\( {m.name}</strong> ( \){m.role})<br>📧 ${m.email}<br>📱 ${m.mobile}`;
+          container.appendChild(div);
+        });
+      });
+    };
+  </script>
+</body>
+</html>
