@@ -8,61 +8,27 @@
   <style>
     :root { --primary: #00ff9f; --dark: #0a0a0f; --card: #12121a; }
     * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      background: var(--dark);
-      color: white;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.7;
-    }
-    header {
-      background: linear-gradient(135deg, #00ff9f, #00b86e);
-      color: black;
-      text-align: center;
-      padding: 70px 20px 50px;
-    }
-    .logo { font-size: 4rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px; }
-    .hero {
-      padding: 80px 20px;
-      text-align: center;
-      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://source.unsplash.com/random/1920x1080/?ai,future');
-      background-size: cover;
-    }
-    .manifesto {
-      padding: 60px 20px;
-      background: var(--card);
-    }
-    .manifesto h2 {
-      text-align: center;
-      font-size: 2.6rem;
-      margin-bottom: 40px;
-      color: var(--primary);
-    }
-    .points {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 18px;
-    }
-    .point {
-      background: #1a1a24;
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 6px solid var(--primary);
-    }
-    .point-number {
-      color: var(--primary);
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-    footer { background: #050507; padding: 40px; text-align: center; }
+    body { background: var(--dark); color: white; font-family: 'Inter', sans-serif; line-height: 1.7; }
+    header { background: linear-gradient(135deg, #00ff9f, #00b86e); color: black; text-align: center; padding: 60px 20px 40px; position: relative; }
+    .logo { font-size: 3.8rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px; }
+    .join-btn { position: absolute; top: 20px; right: 20px; background: black; color: var(--primary); padding: 10px 20px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+    .hero { padding: 60px 20px; text-align: center; background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://source.unsplash.com/random/1920x1080/?ai,future'); background-size: cover; }
+    .section { padding: 60px 20px; background: var(--card); }
+    .points { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; }
+    .point { background: #1a1a24; padding: 20px; border-radius: 12px; border-left: 6px solid var(--primary); }
+    .point-number { color: var(--primary); font-weight: bold; }
+    .join-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; margin: 40px auto; }
+    .join-card { background: #1a1a24; padding: 25px; border-radius: 16px; text-align: center; border: 2px solid #333; transition: 0.3s; }
+    .join-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+    .join-card h3 { color: var(--primary); margin-bottom: 10px; }
+    .count { font-size: 2.2rem; font-weight: bold; color: var(--primary); margin: 10px 0; }
   </style>
 </head>
 <body>
 
   <header>
     <div class="logo">AI JANTA PARTY</div>
-    <p style="font-size:1.4rem;margin-top:10px;">🤖 Artificial Intelligence • Real Justice</p>
+    <button class="join-btn" onclick="document.getElementById('join-section').scrollIntoView({behavior:'smooth'})">JOIN PARTY</button>
   </header>
 
   <div class="hero">
@@ -71,10 +37,9 @@
   </div>
 
   <!-- Manifesto -->
-  <div class="manifesto" id="manifesto">
-    <h2>हमारा संकल्प - AI Janta Party Manifesto</h2>
+  <div class="section">
+    <h2 style="text-align:center; color:var(--primary); margin-bottom:40px;">हमारा संकल्प</h2>
     <div class="points">
-
       <div class="point"><span class="point-number">01.</span> corrupt netao ko nikalo.</div>
       <div class="point"><span class="point-number">02.</span> nikammi aur corrupt police ko nikalo aur berozgaaro ko mauka do berojgaron ki kami nahi.</div>
       <div class="point"><span class="point-number">03.</span> logo ko rojgaar do, pehle se maujood corrupt officers ko nikaalo berozgaar ko mauka do.</div>
@@ -98,14 +63,72 @@
       <div class="point"><span class="point-number">21.</span> khaadya saamgri bhojan fal phool me milawat karne wale ko 15 saal ki jail aur 1 saal tak unhe brutal tarke se torchar kiya jayega is 1 saal me usko jada milawati bhojan diya jayega chemical diya jayega aur ek aise jail me rakha jayega jo gandgi se bhari ho.</div>
       <div class="point"><span class="point-number">22.</span> tax free food khaane ke samaan pe koi bhi tax nahi lagega</div>
       <div class="point"><span class="point-number">23.</span> koi bhi neta agar apradi paya jata hai to wo jis party me samil hoga wo puri party ko hamesha ke liye ban kar diya jayega aur apraadhi neta ko kiye gaye jurm ke hisaab se saja milegi agar rape kiya hai to fasi agar kisi ka muder kiya hai to fasi agar kisi ki sampatti hadpi hai to jaisl sampatti japt.</div>
+    </div>
+  </div>
 
+  <!-- Join Party Section -->
+  <div class="section" id="join-section">
+    <h2 style="text-align:center; color:var(--primary); margin-bottom:30px;">JOIN AI JANTA PARTY</h2>
+    
+    <div style="text-align:center; margin-bottom:40px;">
+      <h3>Total Members Joined: <span id="total-count" style="color:var(--primary); font-size:2.8rem;">0</span></h3>
+    </div>
+
+    <div class="join-options">
+      <div class="join-card"><h3>1. Karyakarta</h3><button onclick="joinParty(1)" style="padding:12px 30px;margin:10px 0;">Join Now</button><p class="count" id="count-1">0</p></div>
+      <div class="join-card"><h3>2. Leader</h3><button onclick="joinParty(2)" style="padding:12px 30px;margin:10px 0;">Join Now</button><p class="count" id="count-2">0</p></div>
+      <div class="join-card"><h3>3. Party Promoter</h3><button onclick="joinParty(3)" style="padding:12px 30px;margin:10px 0;">Join Now</button><p class="count" id="count-3">0</p></div>
+      <div class="join-card"><h3>4. Party Donator</h3><button onclick="joinParty(4)" style="padding:12px 30px;margin:10px 0;">Join Now</button><p class="count" id="count-4">0</p></div>
+      <div class="join-card"><h3>5. Party Supporter</h3><button onclick="joinParty(5)" style="padding:12px 30px;margin:10px 0;">Join Now</button><p class="count" id="count-5">0</p></div>
     </div>
   </div>
 
   <footer>
     <p><strong>AI Janta Party © 2026</strong></p>
-    <p>Code Karo • Desh Sudharo • Nyay Lao</p>
   </footer>
 
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmu19A7kefPCKQZNN_FuJoz98KQZ8o9JFN",
+      authDomain: "ajp-official.firebaseapp.com",
+      databaseURL: "https://ajp-official-default-rtdb.firebaseio.com",
+      projectId: "ajp-official",
+      storageBucket: "ajp-official.firebasestorage.app",
+      messagingSenderId: "137903469154",
+      appId: "1:137903469154:web:8d3a2b36323ed6b87d73b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const membersRef = ref(db, 'members');
+
+    function updateCounts(data) {
+      let total = 0;
+      for(let i=1; i<=5; i++) {
+        const count = data?.[`type${i}`] || 0;
+        document.getElementById(`count-${i}`).textContent = count;
+        total += count;
+      }
+      document.getElementById('total-count').textContent = total;
+    }
+
+    onValue(membersRef, (snapshot) => {
+      updateCounts(snapshot.val());
+    });
+
+    window.joinParty = async function(type) {
+      const typeRef = ref(db, `members/type${type}`);
+      try {
+        await runTransaction(typeRef, (current) => (current || 0) + 1);
+        alert("🎉 Aap successfully join ho gaye AI Janta Party mein!");
+      } catch(e) {
+        alert("Kuch error aaya. Dobara try karo.");
+      }
+    };
+  </script>
 </body>
 </html>
