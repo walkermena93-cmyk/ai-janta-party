@@ -6,134 +6,87 @@
   <title>AI Janta Party | AI for the People</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --primary: #00ff9f;
-      --dark: #0a0a0f;
-      --card: #12121a;
-    }
+    :root { --primary: #00ff9f; --dark: #0a0a0f; --card: #12121a; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       background: var(--dark);
       color: white;
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
+      line-height: 1.7;
     }
     header {
       background: linear-gradient(135deg, #00ff9f, #00b86e);
       color: black;
       text-align: center;
-      padding: 80px 20px 60px;
+      padding: 70px 20px 50px;
     }
-    .logo { font-size: 4.2rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 6px; }
+    .logo { font-size: 4rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px; }
     .hero {
+      padding: 80px 20px;
       text-align: center;
-      padding: 100px 20px;
-      background: linear-gradient(rgba(10,10,15,0.9), rgba(10,10,15,0.9)), url('https://source.unsplash.com/random/1920x1080/?ai,technology');
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://source.unsplash.com/random/1920x1080/?ai,future');
       background-size: cover;
     }
-    h1 { font-size: 3.2rem; margin-bottom: 20px; }
-    .btn {
-      background: var(--primary);
-      color: black;
-      padding: 16px 40px;
-      border: none;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 1.2rem;
-      cursor: pointer;
-      margin: 20px 10px;
-    }
     .manifesto {
-      padding: 80px 20px;
+      padding: 60px 20px;
       background: var(--card);
     }
     .manifesto h2 {
       text-align: center;
-      font-size: 2.8rem;
-      margin-bottom: 50px;
+      font-size: 2.6rem;
+      margin-bottom: 40px;
       color: var(--primary);
     }
     .points {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 18px;
     }
     .point {
       background: #1a1a24;
-      padding: 22px;
-      border-radius: 16px;
-      border-left: 5px solid var(--primary);
-      transition: 0.3s;
-    }
-    .point:hover {
-      transform: translateX(10px);
-      background: #20202b;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 6px solid var(--primary);
     }
     .point-number {
       color: var(--primary);
       font-weight: bold;
-      margin-bottom: 8px;
+      font-size: 1.1rem;
     }
-    footer {
-      background: #050507;
-      text-align: center;
-      padding: 50px 20px;
-    }
+    footer { background: #050507; padding: 40px; text-align: center; }
   </style>
 </head>
 <body>
 
   <header>
     <div class="logo">AI JANTA PARTY</div>
-    <p style="font-size:1.5rem;margin-top:10px;">🤖 Artificial Intelligence • Real Justice</p>
+    <p style="font-size:1.4rem;margin-top:10px;">🤖 Artificial Intelligence • Real Justice</p>
   </header>
 
   <div class="hero">
     <h1>Desh Badlega AI Ke Saath</h1>
-    <p style="font-size:1.4rem;max-width:700px;margin:0 auto 30px;">Corruption Khatam • Nyay Tez • Aam Aadmi ka Raj</p>
-    <button class="btn" onclick="document.getElementById('manifesto').scrollIntoView({behavior:'smooth'})">
-      Hamara Sankalp Padhein
-    </button>
+    <p style="font-size:1.3rem;max-width:800px;margin:20px auto;">Corruption Khatam • Nyay Tez • Aam Aadmi ka Raj</p>
   </div>
 
-  <!-- Manifesto Section -->
+  <!-- Manifesto -->
   <div class="manifesto" id="manifesto">
     <h2>हमारा संकल्प - AI Janta Party Manifesto</h2>
     <div class="points">
 
-      <div class="point"><span class="point-number">01</span> <strong>भ्रष्ट नेताओं को निकालो</strong> — सिस्टम से पूरी तरह साफ़ किया जाएगा।</div>
-      <div class="point"><span class="point-number">02</span> <strong>भ्रष्ट और निकम्मी पुलिस को हटाओ</strong> — बेरोजगार युवाओं को मौका दो।</div>
-      <div class="point"><span class="point-number">03</span> <strong>रोजगार दो</strong> — भर्ती में भ्रष्टाचार करने वालों को सजा।</div>
-      <div class="point"><span class="point-number">04</span> <strong>Homeschooling को कानूनी मान्यता</strong> — लूटेरा स्कूल-कॉलेजों पर लगाम।</div>
-      <div class="point"><span class="point-number">05</span> <strong>भूमाफिया पर सख्ती</strong> — जमीन बेचने वाले को सजा, गरीब का घर नहीं टूटेगा।</div>
-      <div class="point"><span class="point-number">06</span> <strong>केस 1 साल से ज्यादा पेंडिंग नहीं</strong> — जज को जवाबदेही।</div>
-      <div class="point"><span class="point-number">07</span> <strong>Gender Neutral Laws</strong> — पुरुष और महिला दोनों के लिए समान कानून।</div>
-      <div class="point"><span class="point-number">08</span> <strong>नगर निगम अधिकारी 7 साल की सजा</strong> — साफ-सफाई न करने पर बिना जमानत।</div>
-      <div class="point"><span class="point-number">09</span> <strong>मंदिर-मस्जिद-जात-पात का पुनर्निर्माण</strong> — ऊँच-नीच का भेद मिटाओ।</div>
-      <div class="point"><span class="point-number">10</span> <strong>महिलाओं का अंग प्रदर्शन</strong> — 2 साल की जेल + समाज में सम्मान।</div>
-      <div class="point"><span class="point-number">11</span> <strong>रेलवे में मनमानी खत्म</strong> — दोषी अधिकारी हमेशा के लिए बर्खास्त।</div>
-      <div class="point"><span class="point-number">12</span> <strong>डॉक्टरों की मनमानी बंद</strong> — शिकायत पर लाइसेंस रद्द।</div>
-      <div class="point"><span class="point-number">13</span> <strong>Skill Centers</strong> — दिखावे के लिए बनाए तो पूरा सेंटर बंद।</div>
-      <div class="point"><span class="point-number">14</span> <strong>Import कम, Export बढ़ाओ</strong></div>
-      <div class="point"><span class="point-number">15</span> <strong>Paper Leak पर फाँसी</strong></div>
-      <div class="point"><span class="point-number">16</span> <strong>रेप, हत्या, आतंक — फाँसी</strong></div>
-      <div class="point"><span class="point-number">17</span> <strong>जंगल काटने पर देशद्रोही घोषित</strong> — संपत्ति जब्त।</div>
-      <div class="point"><span class="point-number">18</span> <strong>Construction में भ्रष्टाचार — 10 साल जेल + संपत्ति जब्त</strong></div>
-      <div class="point"><span class="point-number">19</span> <strong>Collegium System खत्म</strong> — योग्यता को मौका।</div>
-      <div class="point"><span class="point-number">20</span> <strong>नशे के माफिया को भारी सजा</strong></div>
-      <div class="point"><span class="point-number">21</span> <strong>मिलावट करने वालों को कड़ी सजा</strong></div>
-      <div class="point"><span class="point-number">22</span> <strong>खाने-पीने की चीजों पर टैक्स फ्री</strong></div>
-      <div class="point"><span class="point-number">23</span> <strong>अपराधी नेता की पार्टी पर पूर्ण प्रतिबंध</strong></div>
-
-    </div>
-  </div>
-
-  <footer>
-    <p><strong>AI Janta Party © 2026</strong></p>
-    <p>Code Karo • Desh Sudharo • Nyay Lao</p>
-  </footer>
-
-</body>
-</html>
+      <div class="point"><span class="point-number">01.</span> Corrupt netao ko nikalo.</div>
+      <div class="point"><span class="point-number">02.</span> Nikammi aur corrupt police ko nikalo aur berozgaaro ko mauka do. Berojgaron ki kami nahi.</div>
+      <div class="point"><span class="point-number">03.</span> Logo ko rojgaar do, pehle se maujood corrupt officers ko nikaalo berozgaar ko mauka do.</div>
+      <div class="point"><span class="point-number">04.</span> Homeschooling ko legally vyavasthit karo jisse lutere school clg pe laagaam laegi aur sarkari education ka kharcha bhi kam hoga.</div>
+      <div class="point"><span class="point-number">05.</span> Logo ka ghar thodne ki jagah jisne unhe jameen bechi unka ghar toda jaana chahiye jisse Bhumafia niyantrit hoga.</div>
+      <div class="point"><span class="point-number">06.</span> Koi bhi case 1 saal se jada samay tak Pending nahi rah sakti anyatha judge ko fasi hogi.</div>
+      <div class="point"><span class="point-number">07.</span> Mahila aur purush ke gender neutral law honge.</div>
+      <div class="point"><span class="point-number">08.</span> Nagar ki saaf saafai ka dekh rekh na karne pe nagar nigam ke adhikariyo ko 7 saal ki saja hogi bina bail ke.</div>
+      <div class="point"><span class="point-number">09.</span> Madir, masjid, jaat paat ko reconstruction kiya jayega jisse ucch nich ka antar khatam ho.</div>
+      <div class="point"><span class="point-number">10.</span> Mahilao ko angpradarsan karne pe 2 saal ki jail hogi, apki body koi content nahi hai iska sammaan kare aur samaaj me apni bhumika ko majboot kare.</div>
+      <div class="point"><span class="point-number">11.</span> Railway ki vyavastha ko sudhara jayega aur kisi bhi tarah ki manmaani karne pe adhikaari ko hamesa ke liye suspend kar diya aur uska certificate license bhi radd kar diya jayega.</div>
+      <div class="point"><span class="point-number">12.</span> Hospital ke doctors ki manmaani khatam ki jaayegi aur shikaayat dharj hone par permanent license radd kiya jayega.</div>
+      <div class="point"><span class="point-number">13.</span> Homeschooling ke saath hi government skill center honge jaha log apni ikcha se skill sikh sakenge.</div>
+      <div class="point"><span class="point-number">14.</span> Import ko kam kiya jayega export ko badhaya jayega.</div>
+      <div class="point"><span class="point-number">15.</span> Paper leak karne wale adhikariyon ko faasi kyuki paper leak hone pe naa jaane kitne bacche isi faasi pe jhul jaaate hain
