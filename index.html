@@ -20,9 +20,8 @@
     .point { background: #1a1a24; padding: 20px; border-radius: 12px; border-left: 6px solid var(--primary); }
     .point-number { color: var(--primary); font-weight: bold; }
     .join-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; margin: 40px auto; }
-    .join-card { background: #1a1a24; padding: 25px; border-radius: 16px; text-align: center; border: 2px solid #333; transition: 0.3s; position: relative; }
+    .join-card { background: #1a1a24; padding: 25px; border-radius: 16px; text-align: center; border: 2px solid #333; transition: 0.3s; }
     .join-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-    .count { color: var(--primary); font-size: 1.4rem; font-weight: bold; margin: 8px 0; }
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; }
     .modal-content { background: #12121a; padding: 30px; border-radius: 16px; width: 90%; max-width: 500px; }
     .form-group { margin-bottom: 15px; }
@@ -44,7 +43,7 @@
     <p style="font-size:1.3rem;max-width:800px;margin:20px auto;">Corruption Khatam • Nyay Tez • Aam Aadmi ka Raj</p>
   </div>
 
-  <!-- Manifesto -->
+  <!-- Manifesto (Pura 23 points) -->
   <div class="section">
     <h2 style="text-align:center; color:var(--primary); margin-bottom:40px;">हमारा संकल्प - Manifesto</h2>
     <div class="points">
@@ -74,39 +73,19 @@
     </div>
   </div>
 
-  <!-- Join Section with Counts -->
+  <!-- Join Section -->
   <div class="section" id="join-section">
     <h2 style="text-align:center; color:var(--primary); margin-bottom:40px;">JOIN AI JANTA PARTY</h2>
     <div class="join-options">
-      <div class="join-card">
-        <h3>1. Karyakarta</h3>
-        <div class="count">Joined: <span id="count-1">0</span></div>
-        <button onclick="openJoinForm(1)" style="padding:12px 30px;margin-top:10px;">Join Now</button>
-      </div>
-      <div class="join-card">
-        <h3>2. Leader</h3>
-        <div class="count">Joined: <span id="count-2">0</span></div>
-        <button onclick="openJoinForm(2)" style="padding:12px 30px;margin-top:10px;">Join Now</button>
-      </div>
-      <div class="join-card">
-        <h3>3. Party Promoter</h3>
-        <div class="count">Joined: <span id="count-3">0</span></div>
-        <button onclick="openJoinForm(3)" style="padding:12px 30px;margin-top:10px;">Join Now</button>
-      </div>
-      <div class="join-card">
-        <h3>4. Party Donator</h3>
-        <div class="count">Joined: <span id="count-4">0</span></div>
-        <button onclick="openJoinForm(4)" style="padding:12px 30px;margin-top:10px;">Join Now</button>
-      </div>
-      <div class="join-card">
-        <h3>5. Party Supporter</h3>
-        <div class="count">Joined: <span id="count-5">0</span></div>
-        <button onclick="openJoinForm(5)" style="padding:12px 30px;margin-top:10px;">Join Now</button>
-      </div>
+      <div class="join-card"><h3>1. Karyakarta</h3><button onclick="openJoinForm(1)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
+      <div class="join-card"><h3>2. Leader</h3><button onclick="openJoinForm(2)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
+      <div class="join-card"><h3>3. Party Promoter</h3><button onclick="openJoinForm(3)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
+      <div class="join-card"><h3>4. Party Donator</h3><button onclick="openJoinForm(4)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
+      <div class="join-card"><h3>5. Party Supporter</h3><button onclick="openJoinForm(5)" style="padding:12px 30px;margin-top:10px;">Join Now</button></div>
     </div>
   </div>
 
-  <!-- Join Form Modal -->
+  <!-- Join Form -->
   <div id="joinModal" class="modal">
     <div class="modal-content">
       <h2 id="form-title" style="color:var(--primary); margin-bottom:20px;">Join as Karyakarta</h2>
@@ -119,101 +98,4 @@
   </div>
 
   <!-- Members List -->
-  <div class="section" id="membersList" style="display:none;">
-    <h2 style="text-align:center;color:var(--primary);">Joined Members List</h2>
-    <div id="members-container"></div>
-  </div>
-
-  <footer>
-    <p><strong>AI Janta Party © 2026</strong></p>
-  </footer>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCmu19A7kefPCKQZNN_FuJoz98KQZ8o9JFN",
-      authDomain: "ajp-official.firebaseapp.com",
-      databaseURL: "https://ajp-official-default-rtdb.firebaseio.com",
-      projectId: "ajp-official",
-      storageBucket: "ajp-official.firebasestorage.app",
-      messagingSenderId: "137903469154",
-      appId: "1:137903469154:web:8d3a2b36323ed6b87d73b"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const membersRef = ref(db, 'members');
-
-    let currentRole = "";
-
-    // Live Counts
-    onValue(membersRef, (snapshot) => {
-      const data = snapshot.val() || {};
-      for(let i = 1; i <= 5; i++) {
-        const count = Object.values(data).filter(m => m.role === ["Karyakarta","Leader","Party Promoter","Party Donator","Party Supporter"][i-1]).length;
-        const el = document.getElementById(`count-${i}`);
-        if (el) el.textContent = count;
-      }
-    });
-
-    window.openJoinForm = function(role) {
-      const roles = ["Karyakarta", "Leader", "Party Promoter", "Party Donator", "Party Supporter"];
-      currentRole = roles[role-1];
-      document.getElementById('form-title').textContent = "Join as " + currentRole;
-      document.getElementById('joinModal').style.display = "flex";
-    };
-
-    window.closeModal = function() {
-      document.getElementById('joinModal').style.display = "none";
-    };
-
-    window.submitJoin = function() {
-      const name = document.getElementById('name').value.trim();
-      const mobile = document.getElementById('mobile').value.trim();
-      const email = document.getElementById('email').value.trim();
-
-      if (!name || !mobile || !email) {
-        alert("Name, Mobile aur Email sab bharein");
-        return;
-      }
-
-      push(membersRef, {
-        name: name,
-        mobile: mobile,
-        email: email,
-        role: currentRole,
-        timestamp: Date.now()
-      });
-
-      alert("🎉 Aap successfully join ho gaye AI Janta Party mein!");
-      closeModal();
-      document.getElementById('name').value = '';
-      document.getElementById('mobile').value = '';
-      document.getElementById('email').value = '';
-    };
-
-    window.showMembers = function() {
-      document.getElementById('membersList').style.display = "block";
-      const container = document.getElementById('members-container');
-      container.innerHTML = "<p>Loading members...</p>";
-
-      onValue(membersRef, (snapshot) => {
-        container.innerHTML = "";
-        const data = snapshot.val();
-        if (!data) {
-          container.innerHTML = "<p>Abhi tak koi member join nahi hua.</p>";
-          return;
-        }
-        Object.values(data).reverse().forEach(m => {
-          const div = document.createElement('div');
-          div.className = 'member';
-          div.innerHTML = `<strong>\( {m.name}</strong> ( \){m.role})<br>📧 ${m.email}<br>📱 ${m.mobile}`;
-          container.appendChild(div);
-        });
-      });
-    };
-  </script>
-</body>
-</html>
+  <div class="section" id="membersList" style="display:none
