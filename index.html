@@ -17,148 +17,122 @@
       color: white;
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
-      overflow-x: hidden;
     }
     header {
       background: linear-gradient(135deg, #00ff9f, #00b86e);
       color: black;
       text-align: center;
       padding: 80px 20px 60px;
-      position: relative;
     }
-    .logo {
-      font-size: 4.5rem;
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: 6px;
-      margin-bottom: 10px;
-    }
-    .tagline {
-      font-size: 1.4rem;
-      font-weight: 600;
-      opacity: 0.95;
-    }
+    .logo { font-size: 4.2rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 6px; }
     .hero {
       text-align: center;
       padding: 100px 20px;
-      background: url('https://source.unsplash.com/random/1920x1080/?ai,technology') center/cover no-repeat;
-      position: relative;
+      background: linear-gradient(rgba(10,10,15,0.9), rgba(10,10,15,0.9)), url('https://source.unsplash.com/random/1920x1080/?ai,technology');
+      background-size: cover;
     }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: rgba(10,10,15,0.85);
-    }
-    .hero-content { position: relative; z-index: 2; }
-    h1 { font-size: 3.5rem; margin-bottom: 20px; }
-    .subtitle { font-size: 1.5rem; margin-bottom: 30px; color: var(--primary); }
-
-    .section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .manifesto {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 50px;
-      text-align: center;
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-    }
-    .card {
-      background: var(--card);
-      padding: 30px;
-      border-radius: 16px;
-      border: 1px solid #00ff9f33;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-      border-color: var(--primary);
-    }
+    h1 { font-size: 3.2rem; margin-bottom: 20px; }
     .btn {
       background: var(--primary);
       color: black;
-      padding: 14px 32px;
+      padding: 16px 40px;
       border: none;
       border-radius: 50px;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       cursor: pointer;
-      margin-top: 20px;
+      margin: 20px 10px;
+    }
+    .manifesto {
+      padding: 80px 20px;
+      background: var(--card);
+    }
+    .manifesto h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 50px;
+      color: var(--primary);
+    }
+    .points {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 20px;
+    }
+    .point {
+      background: #1a1a24;
+      padding: 22px;
+      border-radius: 16px;
+      border-left: 5px solid var(--primary);
+      transition: 0.3s;
+    }
+    .point:hover {
+      transform: translateX(10px);
+      background: #20202b;
+    }
+    .point-number {
+      color: var(--primary);
+      font-weight: bold;
+      margin-bottom: 8px;
     }
     footer {
       background: #050507;
       text-align: center;
-      padding: 40px;
-      font-size: 0.9rem;
+      padding: 50px 20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero Section -->
   <header>
     <div class="logo">AI JANTA PARTY</div>
-    <div class="tagline">🤖 Artificial Intelligence • Real Progress</div>
+    <p style="font-size:1.5rem;margin-top:10px;">🤖 Artificial Intelligence • Real Justice</p>
   </header>
 
   <div class="hero">
-    <div class="hero-content">
-      <h1>Desh Ko AI-Powered Banana Hai?</h1>
-      <p class="subtitle">Sabka AI • Sabka Vikas • Sabka Code</p>
-      <button class="btn" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">
-        JOIN THE AI REVOLUTION
-      </button>
-    </div>
+    <h1>Desh Badlega AI Ke Saath</h1>
+    <p style="font-size:1.4rem;max-width:700px;margin:0 auto 30px;">Corruption Khatam • Nyay Tez • Aam Aadmi ka Raj</p>
+    <button class="btn" onclick="document.getElementById('manifesto').scrollIntoView({behavior:'smooth'})">
+      Hamara Sankalp Padhein
+    </button>
   </div>
 
-  <!-- Manifesto -->
-  <div class="section manifesto" id="join">
-    <h2 style="font-size:2.8rem;margin-bottom:20px;">Hamara Sankalp</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>🚀 AI for Every Citizen</h3>
-        <p>Har gareeb ko free AI assistant milega. ChatGPT nahi, Apna Indian AI!</p>
-      </div>
-      <div class="card">
-        <h3>🧠 Smart Governance</h3>
-        <p>Bureaucracy khatam. AI se file 2 minute mein clear.</p>
-      </div>
-      <div class="card">
-        <h3>💰 Job Guarantee 4.0</h3>
-        <p>Har youth ko AI, Coding aur Prompt Engineering ki training.</p>
-      </div>
-    </div>
-    <button class="btn" style="font-size:1.3rem;padding:18px 50px;">Vote for AI Janta Party</button>
-  </div>
+  <!-- Manifesto Section -->
+  <div class="manifesto" id="manifesto">
+    <h2>हमारा संकल्प - AI Janta Party Manifesto</h2>
+    <div class="points">
 
-  <!-- Vision -->
-  <div class="section" style="background:#0f0f16;">
-    <h2 style="text-align:center;font-size:2.5rem;margin-bottom:50px;">Hamara Vision 2030</h2>
-    <div class="card-grid">
-      <div class="card">
-        <strong>AI Education Revolution</strong><br>
-        Har school mein AI teacher
-      </div>
-      <div class="card">
-        <strong>Smart Farming</strong><br>
-        AI se fasal prediction aur better yield
-      </div>
-      <div class="card">
-        <strong>Zero Corruption</strong><br>
-        Blockchain + AI se transparent system
-      </div>
+      <div class="point"><span class="point-number">01</span> <strong>भ्रष्ट नेताओं को निकालो</strong> — सिस्टम से पूरी तरह साफ़ किया जाएगा।</div>
+      <div class="point"><span class="point-number">02</span> <strong>भ्रष्ट और निकम्मी पुलिस को हटाओ</strong> — बेरोजगार युवाओं को मौका दो।</div>
+      <div class="point"><span class="point-number">03</span> <strong>रोजगार दो</strong> — भर्ती में भ्रष्टाचार करने वालों को सजा।</div>
+      <div class="point"><span class="point-number">04</span> <strong>Homeschooling को कानूनी मान्यता</strong> — लूटेरा स्कूल-कॉलेजों पर लगाम।</div>
+      <div class="point"><span class="point-number">05</span> <strong>भूमाफिया पर सख्ती</strong> — जमीन बेचने वाले को सजा, गरीब का घर नहीं टूटेगा।</div>
+      <div class="point"><span class="point-number">06</span> <strong>केस 1 साल से ज्यादा पेंडिंग नहीं</strong> — जज को जवाबदेही।</div>
+      <div class="point"><span class="point-number">07</span> <strong>Gender Neutral Laws</strong> — पुरुष और महिला दोनों के लिए समान कानून।</div>
+      <div class="point"><span class="point-number">08</span> <strong>नगर निगम अधिकारी 7 साल की सजा</strong> — साफ-सफाई न करने पर बिना जमानत।</div>
+      <div class="point"><span class="point-number">09</span> <strong>मंदिर-मस्जिद-जात-पात का पुनर्निर्माण</strong> — ऊँच-नीच का भेद मिटाओ।</div>
+      <div class="point"><span class="point-number">10</span> <strong>महिलाओं का अंग प्रदर्शन</strong> — 2 साल की जेल + समाज में सम्मान।</div>
+      <div class="point"><span class="point-number">11</span> <strong>रेलवे में मनमानी खत्म</strong> — दोषी अधिकारी हमेशा के लिए बर्खास्त।</div>
+      <div class="point"><span class="point-number">12</span> <strong>डॉक्टरों की मनमानी बंद</strong> — शिकायत पर लाइसेंस रद्द।</div>
+      <div class="point"><span class="point-number">13</span> <strong>Skill Centers</strong> — दिखावे के लिए बनाए तो पूरा सेंटर बंद।</div>
+      <div class="point"><span class="point-number">14</span> <strong>Import कम, Export बढ़ाओ</strong></div>
+      <div class="point"><span class="point-number">15</span> <strong>Paper Leak पर फाँसी</strong></div>
+      <div class="point"><span class="point-number">16</span> <strong>रेप, हत्या, आतंक — फाँसी</strong></div>
+      <div class="point"><span class="point-number">17</span> <strong>जंगल काटने पर देशद्रोही घोषित</strong> — संपत्ति जब्त।</div>
+      <div class="point"><span class="point-number">18</span> <strong>Construction में भ्रष्टाचार — 10 साल जेल + संपत्ति जब्त</strong></div>
+      <div class="point"><span class="point-number">19</span> <strong>Collegium System खत्म</strong> — योग्यता को मौका।</div>
+      <div class="point"><span class="point-number">20</span> <strong>नशे के माफिया को भारी सजा</strong></div>
+      <div class="point"><span class="point-number">21</span> <strong>मिलावट करने वालों को कड़ी सजा</strong></div>
+      <div class="point"><span class="point-number">22</span> <strong>खाने-पीने की चीजों पर टैक्स फ्री</strong></div>
+      <div class="point"><span class="point-number">23</span> <strong>अपराधी नेता की पार्टी पर पूर्ण प्रतिबंध</strong></div>
+
     </div>
   </div>
 
   <footer>
     <p><strong>AI Janta Party © 2026</strong></p>
-    <p>Code Karo • Desh Sudharo • AI Badhao</p>
-    <p>Made with ❤️ for the Future of India</p>
+    <p>Code Karo • Desh Sudharo • Nyay Lao</p>
   </footer>
 
 </body>
