@@ -13,757 +13,988 @@
       --dark: #020010;
       --card: #06001a;
       --card2: #0a0025;
+      --glow: rgba(0,245,255,0.15);
+      --glow2: rgba(123,47,247,0.2);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { background: var(--dark); color: white; font-family: 'Rajdhani', sans-serif; line-height: 1.7; overflow-x: hidden; }
 
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--dark);
+      color: white;
+      font-family: 'Rajdhani', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Animated BG ── */
     body::before {
       content: '';
-      position: fixed; inset: 0;
+      position: fixed;
+      inset: 0;
       background:
         radial-gradient(ellipse at 20% 50%, rgba(123,47,247,0.12) 0%, transparent 60%),
         radial-gradient(ellipse at 80% 20%, rgba(0,245,255,0.08) 0%, transparent 50%),
         radial-gradient(ellipse at 60% 80%, rgba(255,0,110,0.06) 0%, transparent 50%);
-      pointer-events: none; z-index: 0;
+      pointer-events: none;
+      z-index: 0;
     }
+
+    /* ── Grid lines bg ── */
     body::after {
       content: '';
-      position: fixed; inset: 0;
+      position: fixed;
+      inset: 0;
       background-image:
         linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
       background-size: 60px 60px;
-      pointer-events: none; z-index: 0;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 999;
-      background: rgba(2,0,16,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,245,255,0.1);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 24px; height: 56px;
-    }
-    .nav-logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem; font-weight: 900;
-      letter-spacing: 3px;
-      background: linear-gradient(135deg, #00f5ff, #7b2ff7);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
-    .nav-link {
-      padding: 6px 12px; border-radius: 4px;
-      font-family: 'Orbitron', sans-serif; font-size: 0.55rem; letter-spacing: 1.5px;
-      cursor: pointer; border: none; background: transparent;
-      color: rgba(255,255,255,0.5); transition: all 0.3s;
-    }
-    .nav-link:hover, .nav-link.active { color: var(--primary); background: rgba(0,245,255,0.08); }
-    .nav-join-btn {
-      padding: 7px 16px; border-radius: 4px;
-      font-family: 'Orbitron', sans-serif; font-size: 0.55rem; letter-spacing: 2px;
-      cursor: pointer; border: none;
-      background: linear-gradient(135deg, var(--secondary), var(--primary));
-      color: black; font-weight: 700; transition: all 0.3s;
-    }
-    .nav-join-btn:hover { box-shadow: 0 0 20px rgba(0,245,255,0.4); transform: translateY(-1px); }
-
-    /* NOTIFICATION BELL */
-    .notif-bell {
-      position: relative; cursor: pointer;
-      width: 36px; height: 36px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; border: 1px solid rgba(0,245,255,0.2);
-      background: rgba(0,245,255,0.05); transition: all 0.3s; font-size: 1rem;
-    }
-    .notif-bell:hover { background: rgba(0,245,255,0.12); border-color: var(--primary); }
-    .notif-badge {
-      position: absolute; top: -4px; right: -4px;
-      background: var(--accent); color: white;
-      font-size: 0.55rem; font-family: 'Orbitron', sans-serif;
-      width: 16px; height: 16px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      display: none;
-    }
-    .notif-dropdown {
-      position: absolute; top: 60px; right: 80px;
-      width: 300px; background: rgba(6,0,26,0.98);
-      border: 1px solid rgba(0,245,255,0.15);
-      border-radius: 10px; padding: 12px;
-      display: none; z-index: 9999;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      max-height: 300px; overflow-y: auto;
-    }
-    .notif-dropdown.show { display: block; }
-    .notif-item {
-      padding: 10px 12px; margin: 4px 0;
-      background: rgba(0,245,255,0.05);
-      border-radius: 6px; border-left: 3px solid var(--secondary);
-      font-size: 0.85rem;
-    }
-    .notif-item .notif-time { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 2px; }
-    .notif-header { font-family: 'Orbitron', sans-serif; font-size: 0.65rem; letter-spacing: 2px; color: var(--primary); margin-bottom: 8px; }
-
-    /* HEADER */
+    /* ── HEADER ── */
     header {
-      position: relative; z-index: 10;
-      background: linear-gradient(180deg, rgba(6,0,26,0.98), rgba(2,0,16,0.95));
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(6,0,26,0.98) 0%, rgba(2,0,16,0.95) 100%);
       border-bottom: 1px solid rgba(0,245,255,0.2);
-      text-align: center; padding: 100px 20px 50px; overflow: hidden;
+      text-align: center;
+      padding: 80px 20px 50px;
+      overflow: hidden;
     }
+
     header::before {
       content: '';
-      position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 300px;
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
       background: radial-gradient(ellipse, rgba(0,245,255,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
+
     .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 900; letter-spacing: 6px;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: 6px;
       background: linear-gradient(135deg, #00f5ff, #7b2ff7, #00f5ff);
       background-size: 200% auto;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       animation: shimmer 3s linear infinite;
+      text-shadow: none;
+      position: relative;
     }
-    .logo-sub { font-family: 'Rajdhani'; font-size: 0.9rem; letter-spacing: 8px; color: rgba(0,245,255,0.5); margin-top: 6px; }
-    @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 
-    /* AI BOT */
-    .ai-bot-container { display: flex; justify-content: center; align-items: center; margin-top: 30px; }
-    .ai-bot { position: relative; width: 140px; height: 140px; animation: botFloat 4s ease-in-out infinite; }
-    @keyframes botFloat { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+    .logo-sub {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 8px;
+      color: rgba(0,245,255,0.5);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .btn-top {
+      position: absolute;
+      top: 24px;
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      border: none;
+      transition: all 0.3s;
+    }
+
+    .members-btn {
+      left: 20px;
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      box-shadow: 0 0 12px rgba(0,245,255,0.3), inset 0 0 12px rgba(0,245,255,0.05);
+    }
+    .members-btn:hover {
+      background: rgba(0,245,255,0.1);
+      box-shadow: 0 0 24px rgba(0,245,255,0.5), inset 0 0 20px rgba(0,245,255,0.1);
+    }
+
+    .join-btn {
+      right: 20px;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      color: white;
+      box-shadow: 0 0 20px rgba(123,47,247,0.4);
+    }
+    .join-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(123,47,247,0.7);
+    }
+
+    /* ── 3D AI BOT ── */
+    .ai-bot-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .ai-bot {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      animation: botFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes botFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(2deg); }
+    }
+
+    .bot-body {
+      width: 80px;
+      height: 90px;
+      background: linear-gradient(135deg, #0d0030, #1a0050);
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,245,255,0.3), inset 0 0 20px rgba(0,245,255,0.05);
+    }
+
+    .bot-head {
+      width: 70px;
+      height: 60px;
+      background: linear-gradient(135deg, #100040, #200060);
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      margin: 0 auto 6px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,245,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bot-eyes {
+      display: flex;
+      gap: 14px;
+    }
+
+    .bot-eye {
+      width: 14px;
+      height: 14px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+      animation: blink 3s ease-in-out infinite;
+    }
+    .bot-eye:nth-child(2) { animation-delay: 0.2s; }
+
+    @keyframes blink {
+      0%, 90%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.1); }
+    }
+
+    .bot-mouth {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--primary);
+      animation: talk 2s ease-in-out infinite;
+    }
+
+    @keyframes talk {
+      0%, 100% { width: 30px; }
+      50% { width: 20px; }
+    }
+
+    .bot-antenna {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 18px;
+      background: var(--primary);
+    }
+    .bot-antenna::after {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+      50% { transform: translateX(-50%) scale(1.4); opacity: 0.6; }
+    }
+
+    .bot-body-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .bot-bar {
+      width: 50px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      border-radius: 2px;
+      animation: scanBar 1.5s ease-in-out infinite;
+    }
+    .bot-bar:nth-child(2) { width: 35px; animation-delay: 0.2s; }
+    .bot-bar:nth-child(3) { width: 45px; animation-delay: 0.4s; }
+
+    @keyframes scanBar {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* Orbit rings around bot */
     .orbit-ring {
-      position: absolute; border-radius: 50%; border: 1px solid rgba(0,245,255,0.2);
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(0,245,255,0.2);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       animation: orbit 6s linear infinite;
     }
     .orbit-ring:nth-child(1) { width: 160px; height: 160px; }
     .orbit-ring:nth-child(2) { width: 200px; height: 200px; animation-duration: 9s; animation-direction: reverse; border-color: rgba(123,47,247,0.15); }
-    .orbit-dot { position: absolute; width: 6px; height: 6px; background: var(--primary); border-radius: 50%; top: -3px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 8px var(--primary); }
-    @keyframes orbit { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
-    .bot-head {
-      width: 70px; height: 60px;
-      background: linear-gradient(135deg, #100040, #200060);
-      border: 2px solid var(--primary); border-radius: 14px;
-      margin: 0 auto 6px; position: relative;
-      box-shadow: 0 0 20px rgba(0,245,255,0.3);
-      display: flex; align-items: center; justify-content: center;
+
+    .orbit-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 8px var(--primary);
     }
-    .bot-antenna { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 2px; height: 18px; background: var(--primary); }
-    .bot-antenna::after { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 1.5s ease-in-out infinite; }
-    @keyframes pulse { 0%,100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.4); opacity: 0.6; } }
-    .bot-eyes { display: flex; gap: 14px; }
-    .bot-eye { width: 14px; height: 14px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); animation: blink 3s ease-in-out infinite; }
-    .bot-eye:nth-child(2) { animation-delay: 0.2s; }
-    @keyframes blink { 0%,90%,100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
-    .bot-mouth { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 30px; height: 3px; background: var(--primary); border-radius: 2px; box-shadow: 0 0 8px var(--primary); animation: talk 2s ease-in-out infinite; }
-    @keyframes talk { 0%,100% { width: 30px; } 50% { width: 20px; } }
-    .bot-body { width: 80px; height: 90px; background: linear-gradient(135deg, #0d0030, #1a0050); border: 2px solid var(--primary); border-radius: 16px; margin: 0 auto; box-shadow: 0 0 30px rgba(0,245,255,0.3); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
-    .bot-bar { width: 50px; height: 4px; background: linear-gradient(90deg, var(--secondary), var(--primary)); border-radius: 2px; animation: scanBar 1.5s ease-in-out infinite; }
-    .bot-bar:nth-child(2) { width: 35px; animation-delay: 0.2s; }
-    .bot-bar:nth-child(3) { width: 45px; animation-delay: 0.4s; }
-    @keyframes scanBar { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-    /* HERO */
-    .hero { position: relative; z-index: 1; padding: 80px 20px 60px; text-align: center; }
-    .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.6rem, 5vw, 3.2rem); font-weight: 700; background: linear-gradient(135deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
-    .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.7); max-width: 700px; margin: 0 auto; letter-spacing: 2px; }
-    .hero-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
-    .hero-tag { padding: 6px 18px; border: 1px solid rgba(0,245,255,0.3); border-radius: 100px; font-size: 0.8rem; letter-spacing: 2px; color: var(--primary); background: rgba(0,245,255,0.05); }
-    .scanline { position: absolute; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0.3; animation: scanline 4s linear infinite; pointer-events: none; }
-    @keyframes scanline { 0% { top: 0%; } 100% { top: 100%; } }
+    @keyframes orbit { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
 
-    /* SECTIONS */
-    .section { position: relative; z-index: 1; padding: 70px 20px; background: rgba(6,0,26,0.8); border-top: 1px solid rgba(0,245,255,0.08); }
-    .section-alt { position: relative; z-index: 1; padding: 70px 20px; background: rgba(2,0,10,0.9); border-top: 1px solid rgba(123,47,247,0.15); }
-    .section-title { text-align: center; color: var(--primary); margin-bottom: 50px; font-family: 'Orbitron', sans-serif; font-size: clamp(1rem, 3vw, 1.6rem); letter-spacing: 4px; text-shadow: 0 0 20px rgba(0,245,255,0.5); }
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 80px 20px 60px;
+      text-align: center;
+    }
 
-    /* MANIFESTO */
-    .points { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
-    .point { background: linear-gradient(135deg, rgba(10,0,37,0.9), rgba(16,0,50,0.9)); padding: 20px 22px; border-radius: 8px; border: 1px solid rgba(0,245,255,0.12); border-left: 3px solid var(--primary); transition: all 0.3s; }
-    .point:hover { border-color: rgba(0,245,255,0.4); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,245,255,0.1); }
-    .point-number { font-family: 'Orbitron', sans-serif; color: var(--primary); font-weight: 700; font-size: 0.75rem; letter-spacing: 2px; display: block; margin-bottom: 6px; }
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 5vw, 3.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
 
-    /* JOIN */
-    .join-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
-    .join-card { background: linear-gradient(160deg, rgba(16,0,50,0.95), rgba(6,0,20,0.95)); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(123,47,247,0.25); transition: all 0.35s; }
-    .join-card:hover { border-color: var(--primary); transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,245,255,0.12); }
-    .join-card h3 { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: rgba(255,255,255,0.9); margin-bottom: 12px; }
-    .count { color: var(--primary); font-size: 1.1rem; font-weight: 700; margin: 10px 0; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 10px rgba(0,245,255,0.5); }
-    .join-card button { padding: 10px 24px; margin-top: 14px; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: black; border: none; border-radius: 4px; font-family: 'Orbitron', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; }
-    .join-card button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,245,255,0.4); }
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 700px;
+      margin: 0 auto;
+      letter-spacing: 2px;
+    }
 
-    /* ABOUT US */
-    .about-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-    @media(max-width:700px){ .about-grid { grid-template-columns: 1fr; } }
-    .about-bot { display: flex; justify-content: center; align-items: center; }
-    .about-bot-wrap { position: relative; width: 180px; height: 180px; }
-    .founder-card { background: linear-gradient(135deg, rgba(10,0,37,0.95), rgba(16,0,50,0.95)); border: 1px solid rgba(0,245,255,0.2); border-radius: 16px; padding: 30px; position: relative; overflow: hidden; }
-    .founder-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent); }
-    .founder-tag { font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 3px; color: var(--secondary); margin-bottom: 8px; }
-    .founder-name { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--primary); text-shadow: 0 0 20px rgba(0,245,255,0.4); margin-bottom: 4px; }
-    .founder-year { font-size: 0.85rem; color: rgba(255,255,255,0.4); letter-spacing: 3px; margin-bottom: 16px; }
-    .founder-desc { font-size: 1rem; color: rgba(255,255,255,0.75); line-height: 1.8; }
-    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
-    .about-stat { background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.12); border-radius: 8px; padding: 14px; text-align: center; }
-    .about-stat-num { font-family: 'Orbitron', sans-serif; color: var(--primary); font-size: 1.3rem; font-weight: 700; }
-    .about-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 1px; margin-top: 2px; }
+    .hero-tags {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
 
-    /* CONTACT */
-    .contact-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .contact-card { background: linear-gradient(135deg, rgba(10,0,37,0.9), rgba(16,0,50,0.9)); border: 1px solid rgba(0,245,255,0.12); border-radius: 12px; padding: 28px 24px; text-align: center; transition: all 0.3s; position: relative; overflow: hidden; }
-    .contact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0; transition: opacity 0.3s; }
-    .contact-card:hover { border-color: rgba(0,245,255,0.3); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,245,255,0.08); }
-    .contact-card:hover::before { opacity: 1; }
-    .contact-icon { font-size: 2rem; margin-bottom: 12px; }
-    .contact-label { font-family: 'Orbitron', sans-serif; font-size: 0.65rem; letter-spacing: 3px; color: var(--secondary); margin-bottom: 8px; }
-    .contact-value { font-size: 1rem; color: rgba(255,255,255,0.85); word-break: break-all; }
-    .contact-value a { color: var(--primary); text-decoration: none; }
-    .contact-value a:hover { text-shadow: 0 0 10px var(--primary); }
+    .hero-tag {
+      padding: 6px 18px;
+      border: 1px solid rgba(0,245,255,0.3);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--primary);
+      background: rgba(0,245,255,0.05);
+    }
 
-    /* DONATE */
-    .donate-wrap { max-width: 600px; margin: 0 auto; text-align: center; }
-    .donate-card { background: linear-gradient(135deg, rgba(10,0,37,0.95), rgba(16,0,50,0.95)); border: 1px solid rgba(123,47,247,0.3); border-radius: 20px; padding: 40px 30px; position: relative; overflow: hidden; }
-    .donate-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--secondary), var(--primary), var(--accent)); }
-    .upi-box { background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.2); border-radius: 10px; padding: 20px; margin: 20px 0; }
-    .upi-label { font-family: 'Orbitron', sans-serif; font-size: 0.65rem; letter-spacing: 3px; color: var(--secondary); margin-bottom: 8px; }
-    .upi-id { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--primary); text-shadow: 0 0 15px rgba(0,245,255,0.4); letter-spacing: 2px; }
-    .copy-btn { padding: 8px 20px; background: transparent; border: 1px solid var(--primary); border-radius: 4px; color: var(--primary); font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
-    .copy-btn:hover { background: rgba(0,245,255,0.1); box-shadow: 0 0 15px rgba(0,245,255,0.3); }
-    .donate-note { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-top: 16px; line-height: 1.6; }
-    .qr-placeholder { width: 140px; height: 140px; background: white; border-radius: 12px; margin: 20px auto; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
-    .qr-placeholder span { color: #333; font-size: 0.65rem; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
+    /* Scan line effect */
+    .scanline {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0.3;
+      animation: scanline 4s linear infinite;
+      pointer-events: none;
+    }
 
-    /* DASHBOARD */
-    .dashboard-grid { max-width: 1000px; margin: 0 auto; }
-    .dash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 30px; }
-    .dash-stat-card { background: linear-gradient(135deg, rgba(10,0,37,0.9), rgba(16,0,50,0.9)); border: 1px solid rgba(0,245,255,0.15); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s; }
-    .dash-stat-card:hover { border-color: var(--primary); transform: translateY(-3px); }
-    .dash-stat-num { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; color: var(--primary); text-shadow: 0 0 20px rgba(0,245,255,0.4); }
-    .dash-stat-label { font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-top: 4px; font-family: 'Orbitron', sans-serif; }
-    .dash-table { width: 100%; border-collapse: collapse; background: rgba(6,0,26,0.6); border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,245,255,0.1); }
-    .dash-table th { background: rgba(0,245,255,0.08); padding: 14px 16px; text-align: left; font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 2px; color: var(--primary); border-bottom: 1px solid rgba(0,245,255,0.1); }
-    .dash-table td { padding: 12px 16px; border-bottom: 1px solid rgba(0,245,255,0.05); font-size: 0.9rem; color: rgba(255,255,255,0.8); }
-    .dash-table tr:hover td { background: rgba(0,245,255,0.03); }
-    .role-badge { padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
-    .role-Karyakarta { background: rgba(0,245,255,0.1); color: var(--primary); border: 1px solid rgba(0,245,255,0.2); }
-    .role-Leader { background: rgba(255,0,110,0.1); color: var(--accent); border: 1px solid rgba(255,0,110,0.2); }
-    .role-Promoter { background: rgba(123,47,247,0.1); color: #a06fff; border: 1px solid rgba(123,47,247,0.2); }
-    .role-Donator { background: rgba(255,200,0,0.1); color: #ffc800; border: 1px solid rgba(255,200,0,0.2); }
-    .role-Supporter { background: rgba(0,255,100,0.1); color: #00ff64; border: 1px solid rgba(0,255,100,0.2); }
-    .dash-search { width: 100%; padding: 12px 16px; background: rgba(0,0,20,0.8); border: 1px solid rgba(0,245,255,0.15); border-radius: 8px; color: white; font-family: 'Rajdhani', sans-serif; font-size: 1rem; outline: none; margin-bottom: 16px; transition: border-color 0.3s; }
-    .dash-search:focus { border-color: rgba(0,245,255,0.4); }
+    @keyframes scanline {
+      0% { top: 0%; }
+      100% { top: 100%; }
+    }
 
-    /* MEMBERS LIST */
-    .member { background: linear-gradient(135deg, rgba(10,0,37,0.9), rgba(6,0,20,0.9)); padding: 18px 20px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(0,245,255,0.1); border-left: 3px solid var(--secondary); transition: all 0.3s; }
-    .member:hover { border-left-color: var(--primary); box-shadow: 0 4px 20px rgba(0,245,255,0.08); }
-    .member strong { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--primary); }
-    #members-container { max-width: 800px; margin: 0 auto; }
+    /* ── SECTIONS ── */
+    .section {
+      position: relative;
+      z-index: 1;
+      padding: 70px 20px;
+      background: rgba(6,0,26,0.8);
+      border-top: 1px solid rgba(0,245,255,0.08);
+      border-bottom: 1px solid rgba(0,245,255,0.08);
+    }
 
-    /* MODAL */
-    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,10,0.95); backdrop-filter: blur(10px); z-index: 1000; align-items: center; justify-content: center; }
-    .modal-content { background: linear-gradient(160deg, rgba(10,0,37,0.99), rgba(6,0,20,0.99)); padding: 36px; border-radius: 12px; width: 90%; max-width: 500px; border: 1px solid rgba(0,245,255,0.2); box-shadow: 0 0 60px rgba(0,245,255,0.1); position: relative; overflow: hidden; }
-    .modal-content::before { content: ''; position: absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent); }
-    #form-title { font-family: 'Orbitron', sans-serif; letter-spacing: 3px; font-size: 1rem; }
+    .section-title {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 50px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(0,245,255,0.5);
+    }
+
+    /* ── MANIFESTO POINTS ── */
+    .points {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .point {
+      background: linear-gradient(135deg, rgba(10,0,37,0.9), rgba(16,0,50,0.9));
+      padding: 20px 22px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,245,255,0.12);
+      border-left: 3px solid var(--primary);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .point::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(0,245,255,0.03), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .point:hover {
+      border-color: rgba(0,245,255,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,245,255,0.1);
+    }
+
+    .point:hover::before { opacity: 1; }
+
+    .point-number {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ── JOIN SECTION ── */
+    .section-alt {
+      position: relative;
+      z-index: 1;
+      padding: 70px 20px;
+      background: rgba(2,0,10,0.9);
+      border-top: 1px solid rgba(123,47,247,0.15);
+    }
+
+    .join-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .join-card {
+      background: linear-gradient(160deg, rgba(16,0,50,0.95), rgba(6,0,20,0.95));
+      padding: 28px 20px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(123,47,247,0.25);
+      transition: all 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .join-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(123,47,247,0.05), rgba(0,245,255,0.05));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .join-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,245,255,0.12), 0 0 0 1px rgba(0,245,255,0.1);
+    }
+
+    .join-card:hover::after { opacity: 1; }
+
+    .join-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 12px;
+    }
+
+    .count {
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 10px 0;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 10px rgba(0,245,255,0.5);
+    }
+
+    .join-card button {
+      padding: 10px 24px;
+      margin-top: 14px;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: black;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .join-card button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,245,255,0.4);
+    }
+
+    /* ── MODAL ── */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,10,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: linear-gradient(160deg, rgba(10,0,37,0.99), rgba(6,0,20,0.99));
+      padding: 36px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      border: 1px solid rgba(0,245,255,0.2);
+      box-shadow: 0 0 60px rgba(0,245,255,0.1), 0 0 0 1px rgba(0,245,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+    }
+
+    #form-title {
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 3px;
+      font-size: 1rem;
+    }
+
     .form-group { margin-bottom: 18px; }
-    .form-group label { display: block; margin-bottom: 6px; color: var(--primary); font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 3px; }
-    .form-group input { width: 100%; padding: 13px 16px; border-radius: 6px; border: 1px solid rgba(0,245,255,0.15); background: rgba(0,0,20,0.8); color: white; font-family: 'Rajdhani', sans-serif; font-size: 1rem; outline: none; transition: border-color 0.3s; }
-    .form-group input:focus { border-color: rgba(0,245,255,0.5); box-shadow: 0 0 12px rgba(0,245,255,0.1); }
-    .btn-submit { width:100%; padding:15px; background: linear-gradient(135deg, var(--secondary), var(--primary)); color:black; border:none; border-radius:6px; font-family:'Orbitron',sans-serif; font-weight:700; font-size:0.7rem; letter-spacing:3px; margin-top:10px; cursor:pointer; transition:all 0.3s; }
-    .btn-submit:hover { box-shadow: 0 0 30px rgba(0,245,255,0.4); transform: translateY(-2px); }
-    .btn-cancel { width:100%; padding:12px; background:transparent; border:1px solid rgba(255,255,255,0.15); border-radius:6px; margin-top:10px; color:rgba(255,255,255,0.5); font-family:'Rajdhani',sans-serif; font-size:1rem; cursor:pointer; transition:all 0.3s; }
-    .btn-cancel:hover { border-color: rgba(255,0,110,0.4); color: var(--accent); }
 
-    /* CORNER DECO */
-    .corner-dec { position: absolute; width: 20px; height: 20px; border-color: var(--primary); border-style: solid; opacity: 0.4; }
-    .corner-tl { top:12px; left:12px; border-width:2px 0 0 2px; }
-    .corner-tr { top:12px; right:12px; border-width:2px 2px 0 0; }
-    .corner-bl { bottom:12px; left:12px; border-width:0 0 2px 2px; }
-    .corner-br { bottom:12px; right:12px; border-width:0 2px 2px 0; }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+    }
 
-    /* FOOTER */
-    footer { position: relative; z-index:1; text-align:center; padding:40px 20px; background: rgba(2,0,10,0.99); border-top: 1px solid rgba(0,245,255,0.1); font-family:'Orbitron',sans-serif; font-size:0.75rem; letter-spacing:3px; color:rgba(0,245,255,0.5); }
-    footer::before { content:''; display:block; width:200px; height:1px; background:linear-gradient(90deg,transparent,var(--primary),transparent); margin:0 auto 20px; }
+    .form-group input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,245,255,0.15);
+      background: rgba(0,0,20,0.8);
+      color: white;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      outline: none;
+    }
 
+    .form-group input:focus {
+      border-color: rgba(0,245,255,0.5);
+      box-shadow: 0 0 12px rgba(0,245,255,0.1);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: black;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-submit:hover {
+      box-shadow: 0 0 30px rgba(0,245,255,0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-cancel {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-cancel:hover {
+      border-color: rgba(255,0,110,0.4);
+      color: var(--accent);
+    }
+
+    /* ── MEMBERS LIST ── */
+    #membersList {
+      background: rgba(2,0,10,0.95);
+    }
+
+    .member {
+      background: linear-gradient(135deg, rgba(10,0,37,0.9), rgba(6,0,20,0.9));
+      padding: 18px 20px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid rgba(0,245,255,0.1);
+      border-left: 3px solid var(--secondary);
+      transition: all 0.3s;
+    }
+
+    .member:hover {
+      border-left-color: var(--primary);
+      box-shadow: 0 4px 20px rgba(0,245,255,0.08);
+    }
+
+    .member strong {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+
+    #members-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(2,0,10,0.99);
+      border-top: 1px solid rgba(0,245,255,0.1);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: rgba(0,245,255,0.5);
+    }
+
+    footer::before {
+      content: '';
+      display: block;
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      margin: 0 auto 20px;
+    }
+
+    /* ── CORNER DECORATIONS ── */
+    .corner-dec {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-color: var(--primary);
+      border-style: solid;
+      opacity: 0.4;
+    }
+    .corner-tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+    .corner-tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+    .corner-bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+    .corner-br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+    /* scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--dark); }
     ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 3px; }
 
-    #particles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
-
-    @media(max-width:600px){
-      .nav-links { display: none; }
-      nav { padding: 0 12px; }
+    /* Particle canvas */
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
 
-<canvas id="particles"></canvas>
+  <canvas id="particles"></canvas>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">AJP</div>
-  <div class="nav-links">
-    <button class="nav-link" onclick="scrollTo('home')">HOME</button>
-    <button class="nav-link" onclick="scrollTo('manifesto')">MANIFESTO</button>
-    <button class="nav-link" onclick="scrollTo('about')">ABOUT</button>
-    <button class="nav-link" onclick="scrollTo('contact')">CONTACT</button>
-    <button class="nav-link" onclick="scrollTo('donate')">DONATE</button>
-    <button class="nav-link" onclick="scrollTo('dashboard')">DASHBOARD</button>
-  </div>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <div class="notif-bell" onclick="toggleNotif()" title="Notifications">
-      馃敂
-      <div class="notif-badge" id="notifBadge">0</div>
-    </div>
-    <button class="nav-join-btn" onclick="scrollTo('join-section')">JOIN NOW</button>
-  </div>
-</nav>
-
-<!-- NOTIF DROPDOWN -->
-<div class="notif-dropdown" id="notifDropdown">
-  <div class="notif-header">馃敂 NOTIFICATIONS</div>
-  <div id="notif-list"><p style="color:rgba(255,255,255,0.3);font-size:0.85rem;text-align:center;padding:10px;">Abhi koi notification nahi</p></div>
-</div>
-
-<!-- HEADER -->
-<header id="home">
-  <div class="corner-dec corner-tl"></div>
-  <div class="corner-dec corner-tr"></div>
-  <div class="corner-dec corner-bl"></div>
-  <div class="corner-dec corner-br"></div>
-  <div class="logo">AI JANTA PARTY</div>
-  <div class="logo-sub"> AI FOR THE PEOPLE </div>
-  <div class="ai-bot-container">
-    <div class="ai-bot">
-      <div class="orbit-ring"><div class="orbit-dot"></div></div>
-      <div class="orbit-ring"><div class="orbit-dot"></div></div>
-      <div class="bot-head">
-        <div class="bot-antenna"></div>
-        <div class="bot-eyes"><div class="bot-eye"></div><div class="bot-eye"></div></div>
-        <div class="bot-mouth"></div>
-      </div>
-      <div class="bot-body">
-        <div class="bot-bar"></div>
-        <div class="bot-bar"></div>
-        <div class="bot-bar"></div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="scanline"></div>
-  <h1>Desh Badlega AI Ke Saath</h1>
-  <p>Corruption Khatam 鈥� Nyay Tez 鈥� Aam Aadmi ka Raj</p>
-  <div class="hero-tags">
-    <span class="hero-tag">CORRUPTION FREE</span>
-    <span class="hero-tag">AI POWERED</span>
-    <span class="hero-tag">JAI HIND</span>
-  </div>
-</div>
-
-<!-- MANIFESTO -->
-<div class="section" id="manifesto">
-  <h2 class="section-title"> == 啶灌ぎ啶距ぐ啶� 啶膏啶曕げ啷嵿お 鈥� MANIFESTO ==</h2>
-  <div class="points">
-    <div class="point"><span class="point-number">[ 01 ]</span> corrupt netao ko nikalo.</div>
-    <div class="point"><span class="point-number">[ 02 ]</span> nikammi aur corrupt police ko nikalo aur berozgaaro ko mauka do berojgaron ki kami nahi.</div>
-    <div class="point"><span class="point-number">[ 03 ]</span> logo ko rojgaar do, pehle se maujood corrupt officers ko nikaalo berozgaar ko mauka do.</div>
-    <div class="point"><span class="point-number">[ 04 ]</span> Homeschooling ko legally vyavasthit karo jisse lutere school clg pe laagaam laegi aur sarkari education ka kharcha bhi kam hoga.</div>
-    <div class="point"><span class="point-number">[ 05 ]</span> logo ka ghar thodne ki jagah jisne unhe jameen bechi unka ghar toda jaana chahiye jisse Bhumafia niyantrit hoga.</div>
-    <div class="point"><span class="point-number">[ 06 ]</span> koi bhi case 1 saal se jada samay tak Pending nahi rah sakti anyatha judge ko fasi hogi.</div>
-    <div class="point"><span class="point-number">[ 07 ]</span> mahila aur purush ke gender neutral law honge.</div>
-    <div class="point"><span class="point-number">[ 08 ]</span> nagar ki saaf saafai ka dekh rekh na karne pe nagar nigam ke adhikariyo ko 7 saal ki saja hogi bina bail ke.</div>
-    <div class="point"><span class="point-number">[ 09 ]</span> madir, masjid, jaat paat ko reconstruction kiya jayega jisse ucch nich ka antar khatam ho.</div>
-    <div class="point"><span class="point-number">[ 10 ]</span> mahilao ko angpradarsan karne pe 2 saal ki jail hogi, apki body koi content nahi hai iska sammaan kare aur samaaj me apni bhumika ko majboot kare.</div>
-    <div class="point"><span class="point-number">[ 11 ]</span> railway ki vyavastha ko sudhara jayega aur kisi bhi tarah ki manmaani karne pe adhikaari ko hamesa ke liye suspend kar diya aur uska certificate license bhi radd kar diya jayega taki wo kahi job na le sake.</div>
-    <div class="point"><span class="point-number">[ 12 ]</span> hospital ke doctors ki manmaani khatam ki jaayegi aur shikaayat dharj hone par permanent license radd kiya jayega saath ki wo dubara kahi bhi chikitsa ko vyapar banane ke kosis na kar sake iska dhyaan rakha jayega.</div>
-    <div class="point"><span class="point-number">[ 13 ]</span> homeschooling ke saath hi government skill center honge jaha log apni ikcha se skill sikh sakenge agar sikll centers me kewal dikhaawe ke liye vyavastha banai jaati hai to pure skill center ko band karke uske sabhi ahikariyon ka permanent license cancel kiya jayega.</div>
-    <div class="point"><span class="point-number">[ 14 ]</span> import ko kam kiya jayega export ko badhaya jayega.</div>
-    <div class="point"><span class="point-number">[ 15 ]</span> paper leak karne wale adhikariyon ko faasi kyuki paper leak hone pe naa jaane kitne bacche isi faasi pe jhul jaaate hain.</div>
-    <div class="point"><span class="point-number">[ 16 ]</span> rape, hatya aur antank me samil logo ko fasi.</div>
-    <div class="point"><span class="point-number">[ 17 ]</span> jungle kaatna puri tarah se ban hoga koi bhi org pvt ya sarkari tantra agar ped ya jangal kaatne ki yojna me saamil paay jaate hain to deshdrohi ghoshit kar desh se nikaal baharkar diya jayega aur unki saari sampatti japt kar li jayegi.</div>
-    <div class="point"><span class="point-number">[ 18 ]</span> cunstruction karne me agar corruption hota hai to uske jach me paye gye dosi chahe wo neta ho ya adhikaari unki sampitti japt kar unke 10 saal ki jail hogi.</div>
-    <div class="point"><span class="point-number">[ 19 ]</span> collegium is trash ji ha dosto collegium ko puri tarah se khatam karke yogyta aur experience ko mauka diya jayega.</div>
-    <div class="point"><span class="point-number">[ 20 ]</span> desh me yuwao ko nasa me dubane wale mafiyaon ko 10 saal tak ek aise jail me rakha jayega jaha unhe roj nasa ka heavy dose diya jayega.</div>
-    <div class="point"><span class="point-number">[ 21 ]</span> khaadya saamgri bhojan fal phool me milawat karne wale ko 15 saal ki jail aur 1 saal tak unhe brutal tarke se torchar kiya jayega.</div>
-    <div class="point"><span class="point-number">[ 22 ]</span> tax free food khaane ke samaan pe koi bhi tax nahi lagega.</div>
-    <div class="point"><span class="point-number">[ 23 ]</span> koi bhi neta agar apradi paya jata hai to wo jis party me samil hoga wo puri party ko hamesha ke liye ban kar diya jayega aur apraadhi neta ko kiye gaye jurm ke hisaab se saja milegi.</div>
-  </div>
-</div>
-
-<!-- JOIN SECTION -->
-<div class="section-alt" id="join-section">
-  <h2 class="section-title"> JOIN AI JANTA PARTY </h2>
-  <div class="join-options">
-    <div class="join-card"><h3>KARYAKARTA</h3><div class="count">JOINED: <span id="count-1">0</span></div><button onclick="openJoinForm(1)">JOIN NOW</button></div>
-    <div class="join-card"><h3>LEADER</h3><div class="count">JOINED: <span id="count-2">0</span></div><button onclick="openJoinForm(2)">JOIN NOW</button></div>
-    <div class="join-card"><h3>PROMOTER</h3><div class="count">JOINED: <span id="count-3">0</span></div><button onclick="openJoinForm(3)">JOIN NOW</button></div>
-    <div class="join-card"><h3>DONATOR</h3><div class="count">JOINED: <span id="count-4">0</span></div><button onclick="openJoinForm(4)">JOIN NOW</button></div>
-    <div class="join-card"><h3>SUPPORTER</h3><div class="count">JOINED: <span id="count-5">0</span></div><button onclick="openJoinForm(5)">JOIN NOW</button></div>
-  </div>
-</div>
-
-<!-- ABOUT US -->
-<div class="section" id="about">
-  <h2 class="section-title"> ABOUT US </h2>
-  <div class="about-grid">
-    <div class="founder-card">
-      <div class="corner-dec corner-tl"></div>
-      <div class="corner-dec corner-tr"></div>
-      <div class="corner-dec corner-bl"></div>
-      <div class="corner-dec corner-br"></div>
-      <div class="founder-tag"> PARTY FOUNDER</div>
-      <div class="founder-name">SATYA PRAKASH</div>
-      <div class="founder-year">ESTABLISHED 2026</div>
-      <div class="founder-desc">
-        AI Janta Party ek nayi soch ki party hai jo Artificial Intelligence ki shakti se desh ko corruption-mukt, nyayik aur samridh banana chahti hai. Hum aam aadmi ki awaaz hain.
-      </div>
-      <div class="about-stats">
-        <div class="about-stat">
-          <div class="about-stat-num">23</div>
-          <div class="about-stat-label">MANIFESTO POINTS</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-num" id="total-members-about">0</div>
-          <div class="about-stat-label">TOTAL MEMBERS</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-num">5</div>
-          <div class="about-stat-label">ROLES</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-num">2026</div>
-          <div class="about-stat-label">FOUNDED</div>
-        </div>
-      </div>
-    </div>
-    <div class="about-bot">
-      <div class="about-bot-wrap">
-        <div class="ai-bot" style="animation-delay:1s;">
-          <div class="orbit-ring"><div class="orbit-dot"></div></div>
-          <div class="orbit-ring"><div class="orbit-dot"></div></div>
-          <div class="bot-head">
-            <div class="bot-antenna"></div>
-            <div class="bot-eyes"><div class="bot-eye"></div><div class="bot-eye"></div></div>
-            <div class="bot-mouth"></div>
-          </div>
-          <div class="bot-body">
-            <div class="bot-bar"></div>
-            <div class="bot-bar"></div>
-            <div class="bot-bar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT -->
-<div class="section-alt" id="contact">
-  <h2 class="section-title"> CONTACT US </h2>
-  <div class="contact-grid">
-    <div class="contact-card">
-      <div class="contact-icon">馃摟</div>
-      <div class="contact-label">EMAIL</div>
-      <div class="contact-value"><a href="mailto:satyaprakashvc@gmail.com">satyaprakashvc@gmail.com</a></div>
-    </div>
-    <div class="contact-card">
-      <div class="contact-icon">馃摫</div>
-      <div class="contact-label">MOBILE</div>
-      <div class="contact-value"><a href="tel:7903604467">+91 7903604467</a></div>
-    </div>
-    <div class="contact-card">
-      <div class="contact-icon">馃摳</div>
-      <div class="contact-label">INSTAGRAM</div>
-      <div class="contact-value"><a href="https://instagram.com/Ai_Janta_Party_Official" target="_blank">@Ai_Janta_Party_Official</a></div>
-    </div>
-  </div>
-</div>
-
-<!-- DONATE -->
-<div class="section" id="donate">
-  <h2 class="section-title"> DONATE & SUPPORT </h2>
-  <div class="donate-wrap">
-    <div class="donate-card">
-      <div class="corner-dec corner-tl"></div>
-      <div class="corner-dec corner-tr"></div>
-      <div class="corner-dec corner-bl"></div>
-      <div class="corner-dec corner-br"></div>
-      <p style="color:rgba(255,255,255,0.6);margin-bottom:10px;font-size:1rem;">Apna yogdan dekar AI Janta Party ko mazboot banao</p>
-      <div class="upi-box">
-        <div class="upi-label"> UPI ID</div>
-        <div class="upi-id">7903604467@ptsbi</div>
-        <button class="copy-btn" onclick="copyUPI()"> COPY UPI ID</button>
-      </div>
-      <div class="qr-placeholder">
-        <span style="font-size:2rem;">馃摫</span>
-        <span>SCAN & PAY</span>
-        <span style="color:#666;font-size:0.5rem;letter-spacing:0">7903604467@ptsbi</span>
-      </div>
-      <div class="donate-note">
-        鉁� Aapka donation party ke vikas mein kaam aayega<br>
-        鉁� Koi bhi amount accepted hai 鈥� 鈧�10 se lekar 鈧�10,000 tak<br>
-        鉁� UPI se seedha transfer karein
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DASHBOARD -->
-<div class="section-alt" id="dashboard">
-  <h2 class="section-title"> MEMBERS DASHBOARD </h2>
-  <div class="dashboard-grid">
-    <div class="dash-stats">
-      <div class="dash-stat-card"><div class="dash-stat-num" id="dash-total">0</div><div class="dash-stat-label">TOTAL MEMBERS</div></div>
-      <div class="dash-stat-card"><div class="dash-stat-num" id="dash-k">0</div><div class="dash-stat-label">KARYAKARTA</div></div>
-      <div class="dash-stat-card"><div class="dash-stat-num" id="dash-l">0</div><div class="dash-stat-label">LEADERS</div></div>
-      <div class="dash-stat-card"><div class="dash-stat-num" id="dash-p">0</div><div class="dash-stat-label">PROMOTERS</div></div>
-      <div class="dash-stat-card"><div class="dash-stat-num" id="dash-d">0</div><div class="dash-stat-label">DONATORS</div></div>
-      <div class="dash-stat-card"><div class="dash-stat-num" id="dash-s">0</div><div class="dash-stat-label">SUPPORTERS</div></div>
-    </div>
-    <input type="text" class="dash-search" id="dashSearch" placeholder="馃攳  Search member by name, email or role..." oninput="filterDashboard()">
-    <div style="overflow-x:auto;">
-      <table class="dash-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>NAME</th>
-            <th>ROLE</th>
-            <th>EMAIL</th>
-            <th>MOBILE</th>
-          </tr>
-        </thead>
-        <tbody id="dash-tbody">
-          <tr><td colspan="5" style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">Loading...</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- MEMBERS LIST (OLD - hidden, kept for compatibility) -->
-<div class="section" id="membersList" style="display:none;">
-  <h2 class="section-title"> JOINED MEMBERS LIST </h2>
-  <div id="members-container"></div>
-</div>
-
-<!-- MODAL -->
-<div id="joinModal" class="modal">
-  <div class="modal-content">
+  <!-- ── HEADER ── -->
+  <header>
     <div class="corner-dec corner-tl"></div>
     <div class="corner-dec corner-tr"></div>
     <div class="corner-dec corner-bl"></div>
     <div class="corner-dec corner-br"></div>
-    <h2 id="form-title" style="color:var(--primary);margin-bottom:24px;">JOIN AS KARYAKARTA</h2>
-    <div class="form-group"><label>NAME *</label><input type="text" id="name" placeholder="Aapka Naam"></div>
-    <div class="form-group"><label>MOBILE NUMBER *</label><input type="tel" id="mobile" placeholder="9876543210"></div>
-    <div class="form-group"><label>EMAIL *</label><input type="email" id="email" placeholder="aapka@email.com"></div>
-    <button class="btn-submit" onclick="submitJoin()"> SUBMIT AND JOIN PARTY</button>
-    <button class="btn-cancel" onclick="closeModal()">CANCEL</button>
+
+    <button class="btn-top members-btn" onclick="showMembers()">⬡ MEMBERS</button>
+    <button class="btn-top join-btn" onclick="document.getElementById('join-section').scrollIntoView({behavior:'smooth'})">JOIN PARTY</button>
+
+    <div class="logo">AI JANTA PARTY</div>
+    <div class="logo-sub">◈ AI FOR THE PEOPLE ◈</div>
+
+    <!-- 3D AI BOT -->
+    <div class="ai-bot-container">
+      <div class="ai-bot">
+        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        <div class="bot-head">
+          <div class="bot-antenna"></div>
+          <div class="bot-eyes">
+            <div class="bot-eye"></div>
+            <div class="bot-eye"></div>
+          </div>
+          <div class="bot-mouth"></div>
+        </div>
+        <div class="bot-body">
+          <div class="bot-body-inner">
+            <div class="bot-bar"></div>
+            <div class="bot-bar"></div>
+            <div class="bot-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="scanline"></div>
+    <h1>Desh Badlega AI Ke Saath</h1>
+    <p>Corruption Khatam • Nyay Tez • Aam Aadmi ka Raj</p>
+    <div class="hero-tags">
+      <span class="hero-tag">CORRUPTION FREE</span>
+      <span class="hero-tag">AI POWERED</span>
+      <span class="hero-tag">JAI HIND</span>
+    </div>
   </div>
-</div>
 
-<footer>
-  <strong>AI JANTA PARTY 漏 2026</strong><br>
-  <span style="font-size:0.6rem;opacity:0.4;letter-spacing:4px;">POWERED BY ARTIFICIAL INTELLIGENCE 鈥� FOUNDER: SATYA PRAKASH</span>
-</footer>
+  <!-- ── MANIFESTO ── -->
+  <div class="section">
+    <h2 class="section-title">◈ हमारा संकल्प — MANIFESTO ◈</h2>
+    <div class="points">
+      <div class="point"><span class="point-number">[ 01 ]</span> corrupt netao ko nikalo.</div>
+      <div class="point"><span class="point-number">[ 02 ]</span> nikammi aur corrupt police ko nikalo aur berozgaaro ko mauka do berojgaron ki kami nahi.</div>
+      <div class="point"><span class="point-number">[ 03 ]</span> logo ko rojgaar do, pehle se maujood corrupt officers ko nikaalo berozgaar ko mauka do.</div>
+      <div class="point"><span class="point-number">[ 04 ]</span> Homeschooling ko legally vyavasthit karo jisse lutere school clg pe laagaam laegi aur sarkari education ka kharcha bhi kam hoga.</div>
+      <div class="point"><span class="point-number">[ 05 ]</span> logo ka ghar thodne ki jagah jisne unhe jameen bechi unka ghar toda jaana chahiye jisse Bhumafia niyantrit hoga.</div>
+      <div class="point"><span class="point-number">[ 06 ]</span> koi bhi case 1 saal se jada samay tak Pending nahi rah sakti anyatha judge ko fasi hogi.</div>
+      <div class="point"><span class="point-number">[ 07 ]</span> mahila aur purush ke gender neutral law honge.</div>
+      <div class="point"><span class="point-number">[ 08 ]</span> nagar ki saaf saafai ka dekh rekh na karne pe nagar nigam ke adhikariyo ko 7 saal ki saja hogi bina bail ke.</div>
+      <div class="point"><span class="point-number">[ 09 ]</span> madir, masjid, jaat paat ko reconstruction kiya jayega jisse ucch nich ka antar khatam ho.</div>
+      <div class="point"><span class="point-number">[ 10 ]</span> mahilao ko angpradarsan karne pe 2 saal ki jail hogi, apki body koi content nahi hai iska sammaan kare aur samaaj me apni bhumika ko majboot kare.</div>
+      <div class="point"><span class="point-number">[ 11 ]</span> railway ki vyavastha ko sudhara jayega aur kisi bhi tarah ki manmaani karne pe adhikaari ko hamesa ke liye suspend kar diya aur uska certificate license bhi radd kar diya jayega taki wo kahi job na le sake.</div>
+      <div class="point"><span class="point-number">[ 12 ]</span> hospital ke doctors ki manmaani khatam ki jaayegi aur shikaayat dharj hone par permanent license radd kiya jayega saath ki wo dubara kahi bhi chikitsa ko vyapar banane ke kosis na kar sake iska dhyaan rakha jayega.</div>
+      <div class="point"><span class="point-number">[ 13 ]</span> homeschooling ke saath hi government skill center honge jaha log apni ikcha se skill sikh sakenge agar sikll centers me kewal dikhaawe ke liye vyavastha banai jaati hai to pure skill center ko band karke uske sabhi ahikariyon ka permanent license cancel kiya jayega.</div>
+      <div class="point"><span class="point-number">[ 14 ]</span> import ko kam kiya jayega export ko badhaya jayega</div>
+      <div class="point"><span class="point-number">[ 15 ]</span> paper leak karne wale adhikariyon ko faasi kyuki paper leak hone pe naa jaane kitne bacche isi faasi pe jhul jaaate hain</div>
+      <div class="point"><span class="point-number">[ 16 ]</span> rape, hatya aur antank me samil logo ko fasi</div>
+      <div class="point"><span class="point-number">[ 17 ]</span> jungle kaatna puri tarah se ban hoga koi bhi org pvt ya sarkari tantra agar ped ya jangal kaatne ki yojna me saamil paay jaate hain to deshdrohi ghoshit kar desh se nikaal baharkar diya jayega aur unki saari sampatti japt kar li jayegi</div>
+      <div class="point"><span class="point-number">[ 18 ]</span> cunstruction karne me agar corruption hota hai to uske jach me paye gye dosi chahe wo neta ho ya adhikaari unki sampitti japt kar unke 10 saal ki jail hogi.</div>
+      <div class="point"><span class="point-number">[ 19 ]</span> collegium is trash ji ha dosto collegium ko puri tarah se khatam karke yogyta aur experience ko mauka diya jayega</div>
+      <div class="point"><span class="point-number">[ 20 ]</span> desh me yuwao ko nasa me dubane wale mafiyaon ko 10 saal tak ek aise jail me rakha jayega jaha unhe roj nasa ka heavy dose diya jayega aur tak diya jayega jab tak wo pagal na ho jaay desh ka bhavishya barbaad karne wale ko barbaad kar dena hi ek matra saja hai.</div>
+      <div class="point"><span class="point-number">[ 21 ]</span> khaadya saamgri bhojan fal phool me milawat karne wale ko 15 saal ki jail aur 1 saal tak unhe brutal tarke se torchar kiya jayega is 1 saal me usko jada milawati bhojan diya jayega chemical diya jayega aur ek aise jail me rakha jayega jo gandgi se bhari ho.</div>
+      <div class="point"><span class="point-number">[ 22 ]</span> tax free food khaane ke samaan pe koi bhi tax nahi lagega</div>
+      <div class="point"><span class="point-number">[ 23 ]</span> koi bhi neta agar apradi paya jata hai to wo jis party me samil hoga wo puri party ko hamesha ke liye ban kar diya jayega aur apraadhi neta ko kiye gaye jurm ke hisaab se saja milegi agar rape kiya hai to fasi agar kisi ka muder kiya hai to fasi agar kisi ki sampatti hadpi hai to jaisl sampatti japt.</div>
+    </div>
+  </div>
 
-<!-- PARTICLES -->
-<script>
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-  const particles = Array.from({length: 60}, () => ({
-    x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-    vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
-    r: Math.random()*1.5+0.3, alpha: Math.random()*0.4+0.1,
-    color: Math.random()>0.5?'0,245,255':'123,47,247'
-  }));
-  function animP() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
-      if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(${p.color},${p.alpha})`; ctx.fill();
+  <!-- ── JOIN SECTION ── -->
+  <div class="section-alt" id="join-section">
+    <h2 class="section-title">◈ JOIN AI JANTA PARTY ◈</h2>
+    <div class="join-options">
+      <div class="join-card">
+        <h3>KARYAKARTA</h3>
+        <div class="count">JOINED: <span id="count-1">0</span></div>
+        <button onclick="openJoinForm(1)">JOIN NOW</button>
+      </div>
+      <div class="join-card">
+        <h3>LEADER</h3>
+        <div class="count">JOINED: <span id="count-2">0</span></div>
+        <button onclick="openJoinForm(2)">JOIN NOW</button>
+      </div>
+      <div class="join-card">
+        <h3>PROMOTER</h3>
+        <div class="count">JOINED: <span id="count-3">0</span></div>
+        <button onclick="openJoinForm(3)">JOIN NOW</button>
+      </div>
+      <div class="join-card">
+        <h3>DONATOR</h3>
+        <div class="count">JOINED: <span id="count-4">0</span></div>
+        <button onclick="openJoinForm(4)">JOIN NOW</button>
+      </div>
+      <div class="join-card">
+        <h3>SUPPORTER</h3>
+        <div class="count">JOINED: <span id="count-5">0</span></div>
+        <button onclick="openJoinForm(5)">JOIN NOW</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── JOIN MODAL ── -->
+  <div id="joinModal" class="modal">
+    <div class="modal-content">
+      <div class="corner-dec corner-tl"></div>
+      <div class="corner-dec corner-tr"></div>
+      <div class="corner-dec corner-bl"></div>
+      <div class="corner-dec corner-br"></div>
+      <h2 id="form-title" style="color:var(--primary); margin-bottom:24px;">JOIN AS KARYAKARTA</h2>
+      <div class="form-group"><label>NAME *</label><input type="text" id="name" placeholder="Aapka Naam"></div>
+      <div class="form-group"><label>MOBILE NUMBER *</label><input type="tel" id="mobile" placeholder="9876543210"></div>
+      <div class="form-group"><label>EMAIL *</label><input type="email" id="email" placeholder="aapka@email.com"></div>
+      <button class="btn-submit" onclick="submitJoin()">⬡ SUBMIT & JOIN PARTY</button>
+      <button class="btn-cancel" onclick="closeModal()">CANCEL</button>
+    </div>
+  </div>
+
+  <!-- ── MEMBERS LIST ── -->
+  <div class="section" id="membersList" style="display:none;">
+    <h2 class="section-title">◈ JOINED MEMBERS LIST ◈</h2>
+    <div id="members-container"></div>
+  </div>
+
+  <footer>
+    <strong>AI JANTA PARTY © 2026</strong><br>
+    <span style="font-size:0.6rem; opacity:0.4; letter-spacing:4px;">POWERED BY ARTIFICIAL INTELLIGENCE</span>
+  </footer>
+
+  <!-- Particle JS -->
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     });
-    for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++) {
-      const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<120){ ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle=`rgba(0,245,255,${0.06*(1-dist/120)})`; ctx.lineWidth=0.5; ctx.stroke(); }
+
+    const particles = Array.from({length: 60}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 1.5 + 0.3,
+      alpha: Math.random() * 0.4 + 0.1,
+      color: Math.random() > 0.5 ? '0,245,255' : '123,47,247'
+    }));
+
+    function animParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+        ctx.fill();
+      });
+
+      // Draw connecting lines
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i+1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0,245,255,${0.06 * (1 - dist/120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animParticles);
     }
-    requestAnimationFrame(animP);
-  }
-  animP();
+    animParticles();
+  </script>
 
-  // Nav scroll
-  function scrollTo(id) { document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-  // Copy UPI
-  function copyUPI() {
-    navigator.clipboard.writeText('7903604467@ptsbi').then(() => alert('鉁� UPI ID copied!\n7903604467@ptsbi'));
-  }
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmu19A7kefPCKQZNN_FuJoz98KQZ8o9JFN",
+      authDomain: "ajp-official.firebaseapp.com",
+      databaseURL: "https://ajp-official-default-rtdb.firebaseio.com",
+      projectId: "ajp-official",
+      storageBucket: "ajp-official.firebasestorage.app",
+      messagingSenderId: "137903469154",
+      appId: "1:137903469154:web:8d3a2b36323ed6b87d73b"
+    };
 
-  // Notifications
-  let notifications = [];
-  function toggleNotif() {
-    document.getElementById('notifDropdown').classList.toggle('show');
-    document.getElementById('notifBadge').style.display='none';
-  }
-  document.addEventListener('click', e => {
-    if(!e.target.closest('.notif-bell') && !e.target.closest('.notif-dropdown'))
-      document.getElementById('notifDropdown').classList.remove('show');
-  });
-  function addNotification(text) {
-    notifications.unshift({text, time: new Date().toLocaleTimeString('hi-IN')});
-    const list = document.getElementById('notif-list');
-    list.innerHTML = notifications.slice(0,10).map(n=>`
-      <div class="notif-item">
-        <div>${n.text}</div>
-        <div class="notif-time">${n.time}</div>
-      </div>`).join('');
-    const badge = document.getElementById('notifBadge');
-    badge.style.display='flex';
-    badge.textContent = notifications.length > 9 ? '9+' : notifications.length;
-  }
-</script>
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const membersRef = ref(db, 'members');
 
-<!-- FIREBASE -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+    let currentRole = "";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCmu19A7kefPCKQZNN_FuJoz98KQZ8o9JFN",
-    authDomain: "ajp-official.firebaseapp.com",
-    databaseURL: "https://ajp-official-default-rtdb.firebaseio.com",
-    projectId: "ajp-official",
-    storageBucket: "ajp-official.firebasestorage.app",
-    messagingSenderId: "137903469154",
-    appId: "1:137903469154:web:8d3a2b36323ed6b87d73b"
-  };
+    onValue(membersRef, (snapshot) => {
+      const data = snapshot.val() || {};
+      const roles = ["Karyakarta", "Leader", "Party Promoter", "Party Donator", "Party Supporter"];
+      for (let i = 1; i <= 5; i++) {
+        const count = Object.values(data).filter(m => m.role === roles[i-1]).length;
+        const el = document.getElementById(`count-${i}`);
+        if (el) el.textContent = count;
+      }
+    });
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  const membersRef = ref(db, 'members');
+    window.openJoinForm = function(role) {
+      const roles = ["Karyakarta", "Leader", "Party Promoter", "Party Donator", "Party Supporter"];
+      currentRole = roles[role-1];
+      document.getElementById('form-title').textContent = "JOIN AS " + currentRole.toUpperCase();
+      document.getElementById('joinModal').style.display = "flex";
+    };
 
-  let currentRole = "";
-  let allMembers = [];
-  let isFirstLoad = true;
+    window.closeModal = function() {
+      document.getElementById('joinModal').style.display = "none";
+    };
 
-  // Live data
-  onValue(membersRef, (snapshot) => {
-    const data = snapshot.val() || {};
-    const roles = ["Karyakarta","Leader","Party Promoter","Party Donator","Party Supporter"];
-    const vals = Object.values(data);
+    window.submitJoin = function() {
+      const name = document.getElementById('name').value.trim();
+      const mobile = document.getElementById('mobile').value.trim();
+      const email = document.getElementById('email').value.trim();
 
-    // Notification on new member (skip first load)
-    if (!isFirstLoad && vals.length > allMembers.length) {
-      const newest = vals[vals.length - 1];
-      if(newest) addNotification(`馃帀 ${newest.name || 'Naya member'} joined as ${newest.role || 'Member'}!`);
-    }
+      if (!name || !mobile || !email) {
+        alert("Name, Mobile aur Email sab bharein");
+        return;
+      }
 
-    allMembers = vals;
-    isFirstLoad = false;
+      push(membersRef, {
+        name: name,
+        mobile: mobile,
+        email: email,
+        role: currentRole,
+        timestamp: Date.now()
+      });
 
-    // Join counts
-    for(let i=1;i<=5;i++){
-      const count = vals.filter(m=>m.role===roles[i-1]).length;
-      const el = document.getElementById(`count-${i}`);
-      if(el) el.textContent = count;
-    }
+      alert("🎉 Aap successfully join ho gaye AI Janta Party mein!");
+      closeModal();
+      document.getElementById('name').value = '';
+      document.getElementById('mobile').value = '';
+      document.getElementById('email').value = '';
+    };
 
-    // About stat
-    const tma = document.getElementById('total-members-about');
-    if(tma) tma.textContent = vals.length;
+    window.showMembers = function() {
+      const membersList = document.getElementById('membersList');
+      membersList.style.display = "block";
+      membersList.scrollIntoView({ behavior: 'smooth' });
+      const container = document.getElementById('members-container');
+      container.innerHTML = "<p style='color:rgba(0,245,255,0.5);text-align:center;letter-spacing:3px;font-family:Orbitron,sans-serif;font-size:0.75rem;'>LOADING MEMBERS...</p>";
 
-    // Dashboard stats
-    const setD = (id,val) => { const el=document.getElementById(id); if(el) el.textContent=val; };
-    setD('dash-total', vals.length);
-    setD('dash-k', vals.filter(m=>m.role==='Karyakarta').length);
-    setD('dash-l', vals.filter(m=>m.role==='Leader').length);
-    setD('dash-p', vals.filter(m=>m.role==='Party Promoter').length);
-    setD('dash-d', vals.filter(m=>m.role==='Party Donator').length);
-    setD('dash-s', vals.filter(m=>m.role==='Party Supporter').length);
-
-    // Dashboard table
-    renderDashboard(vals);
-  });
-
-  function getRoleBadgeClass(role) {
-    if(!role) return '';
-    if(role==='Karyakarta') return 'role-Karyakarta';
-    if(role==='Leader') return 'role-Leader';
-    if(role.includes('Promoter')) return 'role-Promoter';
-    if(role.includes('Donator')) return 'role-Donator';
-    if(role.includes('Supporter')) return 'role-Supporter';
-    return '';
-  }
-
-  function renderDashboard(members) {
-    const tbody = document.getElementById('dash-tbody');
-    if(!tbody) return;
-    if(!members || members.length===0) {
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">Abhi tak koi member nahi</td></tr>';
-      return;
-    }
-    tbody.innerHTML = [...members].reverse().map((m,i) => `
-      <tr>
-        <td style="color:rgba(0,245,255,0.4);font-family:Orbitron,sans-serif;font-size:0.7rem;">${String(members.length-i).padStart(2,'0')}</td>
-        <td><strong style="color:var(--primary);">${m.name||'N/A'}</strong></td>
-        <td><span class="role-badge ${getRoleBadgeClass(m.role)}">${m.role||'N/A'}</span></td>
-        <td style="color:rgba(255,255,255,0.6);">${m.email||'N/A'}</td>
-        <td style="color:rgba(255,255,255,0.6);">${m.mobile||'N/A'}</td>
-      </tr>`).join('');
-  }
-
-  window.filterDashboard = function() {
-    const q = document.getElementById('dashSearch').value.toLowerCase();
-    const filtered = allMembers.filter(m =>
-      (m.name||'').toLowerCase().includes(q) ||
-      (m.email||'').toLowerCase().includes(q) ||
-      (m.role||'').toLowerCase().includes(q)
-    );
-    renderDashboard(filtered);
-  };
-
-  window.openJoinForm = function(role) {
-    const roles = ["Karyakarta","Leader","Party Promoter","Party Donator","Party Supporter"];
-    currentRole = roles[role-1];
-    document.getElementById('form-title').textContent = "JOIN AS " + currentRole.toUpperCase();
-    document.getElementById('joinModal').style.display = "flex";
-  };
-
-  window.closeModal = function() {
-    document.getElementById('joinModal').style.display = "none";
-  };
-
-  window.submitJoin = function() {
-    const name = document.getElementById('name').value.trim();
-    const mobile = document.getElementById('mobile').value.trim();
-    const email = document.getElementById('email').value.trim();
-    if(!name||!mobile||!email){ alert("Name, Mobile aur Email sab bharein"); return; }
-    push(membersRef, { name, mobile, email, role: currentRole, timestamp: Date.now() });
-    alert("馃帀 Aap successfully join ho gaye AI Janta Party mein!");
-    closeModal();
-    document.getElementById('name').value='';
-    document.getElementById('mobile').value='';
-    document.getElementById('email').value='';
-  };
-
-  window.showMembers = function() {
-    document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
-  };
-</script>
+      onValue(membersRef, (snapshot) => {
+        container.innerHTML = "";
+        const data = snapshot.val();
+        if (!data) {
+          container.innerHTML = "<p style='color:rgba(255,255,255,0.3);text-align:center;'>Abhi tak koi member join nahi hua.</p>";
+          return;
+        }
+        Object.values(data).reverse().forEach(m => {
+          const div = document.createElement('div');
+          div.className = 'member';
+          div.innerHTML = `<strong>${m.name || 'N/A'}</strong> <span style="color:var(--secondary);font-size:0.85rem;">(${m.role || 'N/A'})</span><br><span style="color:rgba(255,255,255,0.5);font-size:0.9rem;">📧 ${m.email || 'N/A'}</span><br><span style="color:rgba(255,255,255,0.5);font-size:0.9rem;">📱 ${m.mobile || 'N/A'}</span>`;
+          container.appendChild(div);
+        });
+      });
+    };
+  </script>
 </body>
 </html>
